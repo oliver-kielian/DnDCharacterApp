@@ -49,4 +49,8 @@
     <string name="feat_name">Feat Name</string>
     <string name="prerequisite">Prerequisite</string>
     <string name="add_feat">ADD FEAT</string>
+    <string name="item_name">Item Name</string>
+    <string name="quantity">Quantity</string>
+    <string name="weight">Weight</string>
+    <string name="add_item">ADD ITEM</string>
 </resources>

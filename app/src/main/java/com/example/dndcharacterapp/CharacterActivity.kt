@@ -14,7 +14,8 @@ class CharacterActivity : AppCompatActivity(),
     BackgroundFragment.BackgroundFragmentListener,
     AbilityFragment.AbilityFragmentListener,
     SpellsFragment.SpellsFragmentListener,
-    FeatsFragment.FeatsFragmentListener{
+    FeatsFragment.FeatsFragmentListener,
+    InventoryFragment.InventoryFragmentListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -74,6 +75,13 @@ class CharacterActivity : AppCompatActivity(),
     }
 
     override fun nextFragmentAfterFeats() {
+        val inventoryFragment = InventoryFragment(this)
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.frameLayoutFields, inventoryFragment)
+        ft.commit()
+    }
+
+    override fun nextFragmentAfterInventory() {
         TODO("Not yet implemented")
     }
 
