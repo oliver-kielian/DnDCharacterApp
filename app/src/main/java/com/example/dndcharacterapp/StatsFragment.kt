@@ -62,7 +62,7 @@ class StatsFragment(private val statsFragmentListener: StatsFragmentListener) : 
             when (item.itemId){
                 R.id.next ->
                 {
-
+                    //TODO: INSERT INTO DATABASE
                     statsFragmentListener.nextFragmentAfterStats()
                     true
                 }

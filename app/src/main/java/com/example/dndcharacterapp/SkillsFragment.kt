@@ -5,10 +5,50 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 
-class SkillsFragment : Fragment() {
+class SkillsFragment(private val skillsFragmentListener: SkillsFragmentListener) : Fragment() {
 
-    interface S
+    interface SkillsFragmentListener{
+        fun nextFragmentAfterSkills()
+    }
+
+    private lateinit var nextToolbar : Toolbar
+    private lateinit var skillsNameTextView: TextView
+    private lateinit var checkBoxProficient: CheckBox
+    private lateinit var bonusText : EditText
+    private lateinit var nextButton : Button
+
+    private lateinit var dbHelper: DatabaseHelper
+
+    var currentSkill = 0
+
+    companion object {
+        val skills = listOf(
+            "Acrobatics",
+            "Animal Handling",
+            "Arcana",
+            "Athletics",
+            "Deception",
+            "History",
+            "Insight",
+            "Intimidation",
+            "Investigation",
+            "Medicine",
+            "Nature",
+            "Perception",
+            "Performance",
+            "Persuasion",
+            "Religion",
+            "Sleight of Hand",
+            "Stealth",
+            "Survival"
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -17,6 +57,49 @@ class SkillsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_skills_fagment, container, false)
 
+        skillsNameTextView = view.findViewById(R.id.textViewSkill)
+        checkBoxProficient = view.findViewById(R.id.checkBoxProficient)
+        bonusText = view.findViewById(R.id.editTextNumberBonus)
+        nextButton = view.findViewById(R.id.buttonNext)
+
+        nextToolbar = view.findViewById(R.id.toolbarNextSkills)
+        nextToolbar.inflateMenu(R.menu.next_menu)
+
+        dbHelper = context?.let { DatabaseHelper(it) }!!
+
+        nextToolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId){
+                R.id.next ->
+                {
+                    //TODO: INSERT INTO DATABASE
+                    skillsFragmentListener.nextFragmentAfterSkills()
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        skillsNameTextView.text = skills[currentSkill]
+
+        nextButton.setOnClickListener{nextSkill()}
+
         return view
+    }
+
+    private fun nextSkill()
+    {
+        if(currentSkill != skills.size-1)
+        {
+            currentSkill++
+            //TODO: INSERT INTO DATABASE
+            skillsNameTextView.text = skills[currentSkill]
+            checkBoxProficient.isChecked = false
+            bonusText.text.clear()
+
+        }
+        else{
+            skillsNameTextView.text = "All skills filled"
+        }
     }
 }
