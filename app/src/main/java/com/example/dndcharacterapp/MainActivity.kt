@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity(), ItemAdapter.ItemAdapterListener {
     private lateinit var characterList : RecyclerView
 
     private lateinit var adapter: ItemAdapter
+
+    private lateinit var dbHelper: DatabaseHelper
     private lateinit var cursor: Cursor
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +33,9 @@ class MainActivity : AppCompatActivity(), ItemAdapter.ItemAdapterListener {
 
         mainToolbar = findViewById(R.id.mainToolbar)
         characterList = findViewById(R.id.characterRecyclerView)
+
+        dbHelper = DatabaseHelper(applicationContext)
+        cursor = dbHelper.getAllCharacters()
 
         adapter = ItemAdapter(cursor, this)
         characterList.adapter = adapter

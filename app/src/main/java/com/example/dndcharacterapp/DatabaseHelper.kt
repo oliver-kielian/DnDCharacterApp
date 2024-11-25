@@ -1,6 +1,7 @@
 package com.example.dndcharacterapp
 
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
@@ -138,5 +139,22 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
         TODO("Not yet implemented")
+    }
+
+   fun getAllCharacters(): Cursor {
+        val db = this.readableDatabase
+
+       val cursor = db.query(
+           "character",
+           arrayOf("character_id", "name"),
+           null,
+           null,
+           null,
+           null,
+           null,
+           null
+       )
+
+       return cursor
     }
 }
