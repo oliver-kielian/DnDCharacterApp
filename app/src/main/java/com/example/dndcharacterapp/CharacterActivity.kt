@@ -1,5 +1,6 @@
 package com.example.dndcharacterapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -15,7 +16,10 @@ class CharacterActivity : AppCompatActivity(),
     AbilityFragment.AbilityFragmentListener,
     SpellsFragment.SpellsFragmentListener,
     FeatsFragment.FeatsFragmentListener,
-    InventoryFragment.InventoryFragmentListener{
+    InventoryFragment.InventoryFragmentListener,
+    NotesFragment.NotesFragmentListener{
+
+        private lateinit var resultIntent : Intent
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -30,6 +34,8 @@ class CharacterActivity : AppCompatActivity(),
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.frameLayoutFields, characterFragment)
         ft.commit()
+
+        resultIntent = intent
     }
 
     override fun nextFragmentFromCharacter() {
@@ -82,7 +88,15 @@ class CharacterActivity : AppCompatActivity(),
     }
 
     override fun nextFragmentAfterInventory() {
-        TODO("Not yet implemented")
+        val notesFragment = NotesFragment(this)
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.frameLayoutFields, notesFragment)
+        ft.commit()
+    }
+
+    override fun finishAdding() {
+        setResult(MainActivity.ADDED, resultIntent)
+        finish()
     }
 
 }

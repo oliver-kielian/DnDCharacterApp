@@ -53,4 +53,6 @@
     <string name="quantity">Quantity</string>
     <string name="weight">Weight</string>
     <string name="add_item">ADD ITEM</string>
+    <string name="note_text">Note text</string>
+    <string name="add_note">ADD NOTE</string>
 </resources>
