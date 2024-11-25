@@ -3,4 +3,17 @@
     <string name="add">add</string>
     <string name="item">Item</string>
     <string name="next">NEXT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Name</string>
+    <string name="race">Race</string>
+    <string name="classText">Class</string>
+    <string name="level">Level</string>
+    <string name="alignment">Alignment</string>
+    <string name="current_hit_points">Current Hit Points</string>
+    <string name="max_hit_points">Max Hit Points</string>
+    <string name="armor_class">Armor Class</string>
+    <string name="proficiency_bonus">Proficiency Bonus</string>
+    <string name="select_birthday">Select Birthday</string>
+    <string name="image_url">Image Url</string>
 </resources>

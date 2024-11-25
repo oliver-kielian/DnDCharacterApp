@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CharacterFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editTextTextName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/name" />
+
+        <EditText
+            android:id="@+id/editTextTextRace"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/race" />
+
+        <EditText
+            android:id="@+id/editTextTextClass"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/classText" />
+
+        <EditText
+            android:id="@+id/editTextNumberLevel"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/level"/>
+
+        <EditText
+            android:id="@+id/editTextTextAlignment"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/alignment" />
+
+        <EditText
+            android:id="@+id/editTextNumberHitPoints"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/current_hit_points"/>
+
+        <EditText
+            android:id="@+id/editTextNumberMaxHitPoints"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/max_hit_points"/>
+
+        <EditText
+            android:id="@+id/editTextNumberArmorClass"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/armor_class"/>
+
+        <EditText
+            android:id="@+id/editTextNumberProficiency"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/proficiency_bonus"/>
+
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/select_birthday" />
+
+        <EditText
+            android:id="@+id/editTextTextImage"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/image_url" />
+
+        <Button
+            android:id="@+id/buttonNext"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/next" />
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

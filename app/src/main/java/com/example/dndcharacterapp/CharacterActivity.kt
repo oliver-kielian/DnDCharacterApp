@@ -17,9 +17,11 @@ class CharacterActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val characterFragment = CharacterFragment()
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.frameLayoutFields, characterFragment)
+        ft.commit()
     }
 
-    fun moveToNextPage(view: View) {
-
-    }
 }
