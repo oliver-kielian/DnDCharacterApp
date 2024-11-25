@@ -17,4 +17,12 @@
     <string name="select_birthday">Select Birthday</string>
     <string name="image_url">Image Url</string>
     <string name="speed">Speed</string>
+    <string name="roll_stats">ROLL STATS</string>
+    <string name="strength">Strength</string>
+    <string name="modifier">Modifier</string>
+    <string name="dexterity">Dexterity</string>
+    <string name="constitution">Constitution</string>
+    <string name="intelligence">Intelligence</string>
+    <string name="wisdom">Wisdom</string>
+    <string name="charisma">Charisma</string>
 </resources>

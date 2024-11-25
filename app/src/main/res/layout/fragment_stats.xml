@@ -5,10 +5,119 @@
     android:layout_height="match_parent"
     tools:context=".StatsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+
+        <Button
+            android:id="@+id/buttonRoll"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/roll_stats" />
+
+        <EditText
+            android:id="@+id/editTextNumberStrength"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/strength"/>
+
+        <EditText
+            android:id="@+id/editTextNumberStrengthMod"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/modifier"/>
+
+        <EditText
+            android:id="@+id/editTextNumberDexterity"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/dexterity"/>
+
+        <EditText
+            android:id="@+id/editTextNumberDexterityMod"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/modifier"/>
+
+        <EditText
+            android:id="@+id/editTextNumberConstitution"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/constitution"/>
+
+        <EditText
+            android:id="@+id/editTextNumberConstitutionMod"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/modifier"/>
+
+        <EditText
+            android:id="@+id/editTextNumberIntelligence"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/intelligence"/>
+
+        <EditText
+            android:id="@+id/editTextNumberIntelligenceMod"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/modifier"/>
+
+        <EditText
+            android:id="@+id/editTextNumberWisdom"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/wisdom"/>
+
+        <EditText
+            android:id="@+id/editTextNumberWisdomMod"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/modifier"/>
+
+        <EditText
+            android:id="@+id/editTextNumberCharisma"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/charisma"/>
+
+        <EditText
+            android:id="@+id/editTextNumberCharismaMod"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="@string/modifier"/>
+    </LinearLayout>
 </FrameLayout>
