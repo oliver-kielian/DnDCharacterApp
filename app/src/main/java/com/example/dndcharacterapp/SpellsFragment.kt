@@ -37,6 +37,7 @@ class SpellsFragment(private val spellsFragmentListener: SpellsFragmentListener)
         val view = inflater.inflate(R.layout.fragment_spells, container, false)
 
         nextToolbar = view.findViewById(R.id.toolbarSpells)
+
         spellNameText = view.findViewById(R.id.editTextTextNameSpells)
         levelText = view.findViewById(R.id.editTextNumberLevelSpells)
         schoolText = view.findViewById(R.id.editTextTextSchool)
@@ -48,6 +49,8 @@ class SpellsFragment(private val spellsFragmentListener: SpellsFragmentListener)
         addButton = view.findViewById(R.id.buttonAddSpells)
 
         dbHelper = context?.let { DatabaseHelper(it) }!!
+
+        nextToolbar.inflateMenu(R.menu.next_menu)
 
         nextToolbar.setOnMenuItemClickListener { item ->
             when (item.itemId){

@@ -46,4 +46,7 @@
     <string name="casting_time">Casting Time</string>
     <string name="school">School</string>
     <string name="spell_name">Spell Name</string>
+    <string name="feat_name">Feat Name</string>
+    <string name="prerequisite">Prerequisite</string>
+    <string name="add_feat">ADD FEAT</string>
 </resources>
