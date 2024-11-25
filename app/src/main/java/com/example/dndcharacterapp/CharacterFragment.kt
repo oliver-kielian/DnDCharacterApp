@@ -63,7 +63,7 @@ class CharacterFragment(private val characterFragmentListener: CharacterFragment
             when (item.itemId){
                 R.id.next ->
                 {
-                    dbHelper.insertCharacter(nameText.text.toString(), raceText.text.toString(), classText.text.toString(), levelText.text.toString().toInt(), alignmentText.text.toString(), hitPointsText.text.toString().toInt(), maxHitPointsText.text.toString().toInt(), armorClassText.text.toString().toInt(), proficiencyText.text.toString().toInt(), speedText.text.toString().toInt(), bday, imageText.text.toString())
+                    dbHelper.insertCharacter(nameText.text.toString(), raceText.text.toString(), classText.text.toString(), levelText.text.toString().toIntOrNull() ?: -1, alignmentText.text.toString(), hitPointsText.text.toString().toIntOrNull() ?: -1, maxHitPointsText.text.toString().toIntOrNull() ?: -1, armorClassText.text.toString().toIntOrNull() ?: -1, proficiencyText.text.toString().toIntOrNull() ?: -1, speedText.text.toString().toIntOrNull() ?: -1, bday, imageText.text.toString())
                     characterFragmentListener.nextFragmentFromCharacter()
                     true
                 }
