@@ -1,6 +1,8 @@
 package com.example.dndcharacterapp
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -25,5 +27,21 @@ class MainActivity : AppCompatActivity() {
         mainToolbar = findViewById(R.id.mainToolbar)
         characterList = findViewById(R.id.characterRecyclerView)
 
+        setSupportActionBar(mainToolbar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.add ->{
+
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
