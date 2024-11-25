@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DnDCharacterApp</string>
+    <string name="add">add</string>
+    <string name="item">Item</string>
 </resources>
