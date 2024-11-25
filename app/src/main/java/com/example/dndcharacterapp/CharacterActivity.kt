@@ -25,7 +25,10 @@ class CharacterActivity : AppCompatActivity(), CharacterFragment.CharacterFragme
     }
 
     override fun nextFragmentFromCharacter() {
-        //TODO: STATS FRAGMENT
+        val statsFragment = StatsFragment()
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.frameLayoutFields, statsFragment)
+        ft.commit()
     }
 
 }
