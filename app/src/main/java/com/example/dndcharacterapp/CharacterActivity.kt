@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class CharacterActivity : AppCompatActivity(), CharacterFragment.CharacterFragmentListener, StatsFragment.StatsFragmentListener, SkillsFragment.SkillsFragmentListener {
+class CharacterActivity : AppCompatActivity(), CharacterFragment.CharacterFragmentListener, StatsFragment.StatsFragmentListener, SkillsFragment.SkillsFragmentListener, BackgroundFragment.BackgroundFragmentListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -39,6 +39,13 @@ class CharacterActivity : AppCompatActivity(), CharacterFragment.CharacterFragme
     }
 
     override fun nextFragmentAfterSkills() {
+        val backgroundFragment = BackgroundFragment(this)
+        val ft = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.frameLayoutFields, backgroundFragment)
+        ft.commit()
+    }
+
+    override fun nextFragmentAfterBackground() {
         TODO("Not yet implemented")
     }
 

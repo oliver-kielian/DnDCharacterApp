@@ -29,4 +29,9 @@
     <string name="proficient">Proficient</string>
     <string name="bonus">Bonus</string>
     <string name="next_skill">NEXT SKILL</string>
+    <string name="background_name">Background Name</string>
+    <string name="personality_trait">Personality Trait</string>
+    <string name="ideals">Ideals</string>
+    <string name="bonds">Bonds</string>
+    <string name="flaws">Flaws</string>
 </resources>
