@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.dndcharacterapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.dndcharacterapp"
