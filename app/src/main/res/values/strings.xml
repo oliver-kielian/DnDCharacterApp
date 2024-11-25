@@ -2,4 +2,5 @@
     <string name="app_name">DnDCharacterApp</string>
     <string name="add">add</string>
     <string name="item">Item</string>
+    <string name="next">NEXT</string>
 </resources>

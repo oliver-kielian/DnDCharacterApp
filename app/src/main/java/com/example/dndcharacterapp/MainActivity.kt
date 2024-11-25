@@ -1,5 +1,6 @@
 package com.example.dndcharacterapp
 
+import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
 import android.view.Menu
@@ -52,7 +53,8 @@ class MainActivity : AppCompatActivity(), ItemAdapter.ItemAdapterListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.add ->{
-
+                val intent = Intent(applicationContext, CharacterActivity::class.java)
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -60,6 +62,6 @@ class MainActivity : AppCompatActivity(), ItemAdapter.ItemAdapterListener {
     }
 
     override fun click(position: Int) {
-        TODO("Not yet implemented")
+
     }
 }
