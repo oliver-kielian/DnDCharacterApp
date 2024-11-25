@@ -34,4 +34,8 @@
     <string name="ideals">Ideals</string>
     <string name="bonds">Bonds</string>
     <string name="flaws">Flaws</string>
+    <string name="ability_name">Ability Name</string>
+    <string name="ability_desc">Ability Desc</string>
+    <string name="level_requirement">Level Requirement</string>
+    <string name="add_another_ability">ADD ANOTHER ABILITY</string>
 </resources>
