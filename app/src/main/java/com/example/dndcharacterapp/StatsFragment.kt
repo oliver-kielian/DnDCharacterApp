@@ -53,7 +53,7 @@ class StatsFragment(private val statsFragmentListener: StatsFragmentListener) : 
         charismaText = view.findViewById(R.id.editTextNumberCharisma)
         charismaTextMod = view.findViewById(R.id.editTextNumberCharismaMod)
 
-        nextToolbar = view.findViewById(R.id.toolbarNext)
+        nextToolbar = view.findViewById(R.id.toolbarNextStats)
         nextToolbar.inflateMenu(R.menu.next_menu)
 
         dbHelper = context?.let { DatabaseHelper(it) }!!

@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity(), ItemAdapter.ItemAdapterListener {
         characterList.layoutManager = LinearLayoutManager(this)
 
         setSupportActionBar(mainToolbar)
+
+        adapter.notifyDataSetChanged()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

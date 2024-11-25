@@ -25,4 +25,8 @@
     <string name="intelligence">Intelligence</string>
     <string name="wisdom">Wisdom</string>
     <string name="charisma">Charisma</string>
+    <string name="skill_name">Skill Name</string>
+    <string name="proficient">Proficient</string>
+    <string name="bonus">Bonus</string>
+    <string name="next_skill">NEXT SKILL</string>
 </resources>
