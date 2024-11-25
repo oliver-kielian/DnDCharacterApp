@@ -180,4 +180,45 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         db.insert("character", null, characterValues)
         db.close()
     }
+
+    fun getCharacter(id: Int = -1, name: String = ""): Cursor {
+        val db = this.readableDatabase
+        var cursor = db.query(
+            "character",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        )
+        if(id == -1)
+        {
+            cursor = db.query(
+                "character",
+                arrayOf("character_id", "name"),
+                "character_id = ?",
+                arrayOf(id.toString()),
+                null,
+                null,
+                null,
+                null
+            )
+        }
+        else if(name == "")
+        {
+            cursor = db.query(
+                "character",
+                arrayOf("character_id", "name"),
+                "name = ?",
+                arrayOf(name),
+                null,
+                null,
+                null,
+                null
+            )
+        }
+        return cursor
+    }
 }
