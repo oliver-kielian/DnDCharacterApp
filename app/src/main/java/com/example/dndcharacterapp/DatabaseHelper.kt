@@ -1,5 +1,6 @@
 package com.example.dndcharacterapp
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
@@ -156,5 +157,27 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
        )
 
        return cursor
+    }
+
+    fun insertCharacter(name:String, race:String, char_class:String, level:Int, alignment:String, hit_points:Int, max_hit_points:Int, armor_class:Int, proficiency_bonus:Int, speed:Int, bday:String, image:String){
+        val db = this.readableDatabase
+
+        val characterValues = ContentValues().apply {
+            put("name", name)
+            put("race", race)
+            put("class", char_class)
+            put("level", level)
+            put("alignment", alignment)
+            put("hit_points", hit_points)
+            put("max_hit_points", max_hit_points)
+            put("armor_class", armor_class)
+            put("proficiency_bonus", proficiency_bonus)
+            put("speed", speed)
+            put("birthday", bday)
+            put("image", image)
+        }
+
+        db.insert("character", null, characterValues)
+        db.close()
     }
 }

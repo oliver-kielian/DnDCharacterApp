@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class CharacterActivity : AppCompatActivity() {
+class CharacterActivity : AppCompatActivity(), CharacterFragment.CharacterFragmentListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -18,10 +18,14 @@ class CharacterActivity : AppCompatActivity() {
             insets
         }
 
-        val characterFragment = CharacterFragment()
+        val characterFragment = CharacterFragment(this)
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.frameLayoutFields, characterFragment)
         ft.commit()
+    }
+
+    override fun nextFragmentFromCharacter() {
+        //TODO: STATS FRAGMENT
     }
 
 }

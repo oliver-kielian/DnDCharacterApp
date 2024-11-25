@@ -16,4 +16,5 @@
     <string name="proficiency_bonus">Proficiency Bonus</string>
     <string name="select_birthday">Select Birthday</string>
     <string name="image_url">Image Url</string>
+    <string name="speed">Speed</string>
 </resources>
