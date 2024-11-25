@@ -38,4 +38,12 @@
     <string name="ability_desc">Ability Desc</string>
     <string name="level_requirement">Level Requirement</string>
     <string name="add_another_ability">ADD ANOTHER ABILITY</string>
+    <string name="add_spell">ADD SPELL</string>
+    <string name="description">Description</string>
+    <string name="duration">Duration</string>
+    <string name="components">Components</string>
+    <string name="range">Range</string>
+    <string name="casting_time">Casting Time</string>
+    <string name="school">School</string>
+    <string name="spell_name">Spell Name</string>
 </resources>
