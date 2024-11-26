@@ -80,7 +80,7 @@ class CharacterFragment(private val characterFragmentListener: CharacterFragment
                         bday,
                         imageText.text.toString())
 
-                    val cursor = dbHelper.getCharacter(null, nameText.text.toString())
+                    val cursor = dbHelper.getCharacterByName(nameText.text.toString())
                     cursor.moveToFirst()
                     val index = cursor.getColumnIndex("character_id")
                     val charID = cursor.getInt(index)

@@ -56,6 +56,7 @@
     <string name="add_note">ADD NOTE</string>
     <string name="story">Story</string>
     <string name="go">GO</string>
+    <string name="update">update</string>
     <string-array name="tables">
         <item>Character</item>
         <item>Skills</item>

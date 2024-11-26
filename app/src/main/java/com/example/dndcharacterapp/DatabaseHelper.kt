@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import androidx.core.content.contentValuesOf
 
 class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -144,7 +145,12 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         TODO("Not yet implemented")
     }
 
-   fun getAllCharacters(): Cursor {
+    override fun onConfigure(db: SQLiteDatabase?) {
+        super.onConfigure(db)
+        db?.setForeignKeyConstraintsEnabled(true)
+    }
+
+    fun getAllCharacters(): Cursor {
         val db = this.readableDatabase
 
        val cursor = db.query(
@@ -316,20 +322,9 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         db.close()
     }
 
-    fun getCharacter(id: Int? = -1, name: String = ""): Cursor {
+    fun getCharacterByName(name: String): Cursor {
         val db = this.readableDatabase
         var cursor = db.query(
-            "character",
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-        )
-        if (id == -1) {
-            cursor = db.query(
                 "character",
                 arrayOf("character_id", "name"),
                 "name = ?",
@@ -339,31 +334,36 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
                 null,
                 null
             )
-        } else if (name == "") {
-            cursor = db.query(
-                "character",
-                arrayOf(
-                    "character_id",
-                    "name",
-                    "race",
-                    "char_class",
-                    "level",
-                    "alignment",
-                    "hit_points",
-                    "max_hit_points",
-                    "armor_class",
-                    "speed",
-                    "birthday",
-                    "image"
-                ),
-                "character_id = ?",
-                arrayOf(id.toString()),
-                null,
-                null,
-                null,
-                null
-            )
-        }
+
+        return cursor
+    }
+
+    fun getCharacterByID(charId: Int) : Cursor{
+        val db = this.readableDatabase
+        val cursor = db.query(
+            "character",
+            arrayOf(
+                "character_id",
+                "name",
+                "race",
+                "char_class",
+                "level",
+                "alignment",
+                "hit_points",
+                "max_hit_points",
+                "armor_class",
+                "speed",
+                "birthday",
+                "image"
+            ),
+            "character_id = ?",
+            arrayOf(charId.toString()),
+            null,
+            null,
+            null,
+            null
+        )
+
         return cursor
     }
 
@@ -372,7 +372,20 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         val db = this.readableDatabase
 
         val cursor = db.query(
-
+            "abilities",
+            arrayOf(
+                "name",
+                "description",
+                "level_requirement"
+            ),
+            "character_id = ?",
+            arrayOf(charId.toString()),
+            null,
+            null,
+            null,
+            null
         )
+
+        return cursor
     }
 }

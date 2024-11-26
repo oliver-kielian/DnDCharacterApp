@@ -1,6 +1,7 @@
 package com.example.dndcharacterapp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.webkit.WebView
 import android.widget.Button
@@ -37,12 +38,13 @@ class CharacterDetailActivity : AppCompatActivity() {
 
         val intent = intent
         charID = intent.getIntExtra("ID", 0)
+        Log.d("CharacterID", "Query: $charID")
 
         setCharacterImage()
     }
 
     private fun setCharacterImage() {
-        val cursor = dbHelper.getCharacter(charID)
+        val cursor = dbHelper.getCharacterByID(charID)
 
         cursor.moveToFirst()
         val imageIndex = cursor.getColumnIndex("image")
