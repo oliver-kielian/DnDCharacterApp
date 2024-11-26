@@ -167,19 +167,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
        return cursor
     }
 
-    fun insertFeats(charId: Int, name:String, desc:String, prereq:String){
-        val db = this.readableDatabase
-
-        val featValues = ContentValues().apply {
-            put("character_id", charId)
-            put("name", name)
-            put("description", desc)
-            put("prerequisite", prereq)
-        }
-
-        db.insert("feats", null, featValues)
-        db.close()
-    }
 
     fun insertInventory(charId: Int, name: String, quantity: Int, weight : Float, desc: String){
         val db = this.readableDatabase
@@ -508,5 +495,55 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
 
         db.update("character", characterValues, where, args)
         db.close()
+    }
+/************************************* Feats *************************************/
+
+    fun insertFeats(charId: Int, name:String, desc:String, prereq:String){
+        val db = this.readableDatabase
+
+        val featValues = ContentValues().apply {
+            put("character_id", charId)
+            put("name", name)
+            put("description", desc)
+            put("prerequisite", prereq)
+        }
+
+        db.insert("feats", null, featValues)
+        db.close()
+    }
+
+    fun updateFeat(featId: Int, name:String, desc:String, prereq:String)
+    {
+        val db = this.readableDatabase
+
+        val featValues = ContentValues().apply {
+            put("name", name)
+            put("description", desc)
+            put("prerequisite", prereq)
+        }
+
+        val where = "feat_id = ?"
+        val args = arrayOf(featId.toString())
+
+        db.update("feats", featValues, where, args)
+        db.close()
+    }
+
+    fun getFeat(featId: Int) : Cursor
+    {
+        val db = this.readableDatabase
+
+        val cursor = db.query(
+            "feats",
+            arrayOf("feat_id", "name", "description", "prerequisite"),
+            "feat_id = ?",
+            arrayOf(featId.toString()),
+            null,
+            null,
+            null,
+            null
+        )
+
+        return cursor
     }
 }
