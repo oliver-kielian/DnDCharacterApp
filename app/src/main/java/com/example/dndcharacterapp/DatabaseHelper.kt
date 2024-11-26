@@ -188,19 +188,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         db.close()
     }
 
-    fun insertAbility(charId: Int, name:String, desc:String, level:Int)
-    {
-        val db = this.readableDatabase
-        val abilityValues = ContentValues().apply {
-            put("character_id", charId)
-            put("name", name)
-            put("description", desc)
-            put("level_requirement", level)
-        }
-
-        db.insert("abilities", null, abilityValues)
-        db.close()
-    }
 
     fun insertFeats(charId: Int, name:String, desc:String, prereq:String){
         val db = this.readableDatabase
@@ -250,17 +237,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         db.close()
     }
 
-    fun insertNotes(charId: Int, text : String){
-        val db = this.readableDatabase
-
-        val noteValues = ContentValues().apply{
-            put("character_id", charId)
-            put("note_text", text)
-        }
-
-        db.insert("notes", null, noteValues)
-        db.close()
-    }
 
     fun insertSpells(charId: Int, name: String, level: Int, school : String, castingTime : String, range: String, components : String, duration : String, desc: String){
         val db = this.readableDatabase
@@ -366,6 +342,20 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
 
         return cursor
     }
+/************************************************ Abilities **************************************************/
+    fun insertAbility(charId: Int, name:String, desc:String, level:Int)
+    {
+        val db = this.readableDatabase
+        val abilityValues = ContentValues().apply {
+            put("character_id", charId)
+            put("name", name)
+            put("description", desc)
+            put("level_requirement", level)
+        }
+
+        db.insert("abilities", null, abilityValues)
+        db.close()
+    }
 
     fun getAbility(charId: Int) : Cursor
     {
@@ -403,6 +393,51 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         val args = arrayOf(abilityId.toString())
 
         db.update("abilities", ability, where, args)
+        db.close()
+    }
+/******************************************** NOTES ****************************************************/
+
+    fun insertNotes(charId: Int, text : String) {
+        val db = this.readableDatabase
+
+        val noteValues = ContentValues().apply {
+            put("character_id", charId)
+            put("note_text", text)
+        }
+
+        db.insert("notes", null, noteValues)
+        db.close()
+    }
+
+    fun getNote(charId : Int) : Cursor{
+        val db = this.readableDatabase
+
+        val cursor = db.query(
+            "notes",
+            arrayOf("notes_id", "note_text"),
+            "character_id = ?",
+            arrayOf(charId.toString()),
+            null,
+            null,
+            null,
+            null
+        )
+
+        return cursor
+    }
+
+    fun updateNote(noteID : Int, text : String)
+    {
+        val db = this.readableDatabase
+
+        val note = ContentValues().apply {
+            put("note_text", text)
+        }
+
+        val where = "notes_id = ?"
+        val args = arrayOf(noteID.toString())
+
+        db.update("notes", note, where, args)
         db.close()
     }
 }
