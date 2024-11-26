@@ -12,7 +12,7 @@ import androidx.appcompat.widget.Toolbar
 class CharacterFragment(private val characterFragmentListener: CharacterFragmentListener) : Fragment() {
 
     interface CharacterFragmentListener {
-        fun nextFragmentFromCharacter()
+        fun nextFragmentFromCharacter(charID: Int)
     }
 
     private lateinit var nextToolbar: Toolbar
@@ -53,6 +53,8 @@ class CharacterFragment(private val characterFragmentListener: CharacterFragment
         birthdayButton = view.findViewById(R.id.buttonBday)
         imageText = view.findViewById(R.id.editTextTextImage)
 
+        birthdayButton.setOnClickListener{pickBday()}
+
 
         nextToolbar = view.findViewById(R.id.toolbarNext)
         nextToolbar.inflateMenu(R.menu.next_menu)
@@ -63,8 +65,24 @@ class CharacterFragment(private val characterFragmentListener: CharacterFragment
             when (item.itemId){
                 R.id.next ->
                 {
-                    //dbHelper.insertCharacter(nameText.text.toString(), raceText.text.toString(), classText.text.toString(), levelText.text.toString().toIntOrNull() ?: -1, alignmentText.text.toString(), hitPointsText.text.toString().toIntOrNull() ?: -1, maxHitPointsText.text.toString().toIntOrNull() ?: -1, armorClassText.text.toString().toIntOrNull() ?: -1, proficiencyText.text.toString().toIntOrNull() ?: -1, speedText.text.toString().toIntOrNull() ?: -1, bday, imageText.text.toString())
-                    characterFragmentListener.nextFragmentFromCharacter()
+                    dbHelper.insertCharacter(nameText.text.toString(),
+                        raceText.text.toString(),
+                        classText.text.toString(),
+                        levelText.text.toString().toIntOrNull() ?: -1,
+                        alignmentText.text.toString(),
+                        hitPointsText.text.toString().toIntOrNull() ?: -1,
+                        maxHitPointsText.text.toString().toIntOrNull() ?: -1,
+                        armorClassText.text.toString().toIntOrNull() ?: -1,
+                        proficiencyText.text.toString().toIntOrNull() ?: -1,
+                        speedText.text.toString().toIntOrNull() ?: -1,
+                        bday,
+                        imageText.text.toString())
+
+                    val cursor = dbHelper.getCharacter(null, nameText.text.toString())
+                    cursor.moveToFirst()
+                    val index = cursor.getColumnIndex("character_id")
+                    val charID = cursor.getInt(index)
+                    characterFragmentListener.nextFragmentFromCharacter(charID)
                     true
                 }
 
@@ -72,5 +90,9 @@ class CharacterFragment(private val characterFragmentListener: CharacterFragment
             }
         }
         return view
+    }
+
+    private fun pickBday() {
+        TODO("Not yet implemented")
     }
 }

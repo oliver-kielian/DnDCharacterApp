@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 
-class FeatsFragment(private val featsFragmentListener: FeatsFragmentListener) : Fragment() {
+class FeatsFragment(private val featsFragmentListener: FeatsFragmentListener, private val charId: Int) : Fragment() {
 
     interface FeatsFragmentListener{
         fun nextFragmentAfterFeats()
@@ -45,7 +45,7 @@ class FeatsFragment(private val featsFragmentListener: FeatsFragmentListener) : 
             when (item.itemId){
                 R.id.next ->
                 {
-                    //TODO: INSERT INTO DATABASE
+                    dbHelper.insertFeats(charId, nameText.text.toString(), descText.text.toString(), prereqText.text.toString())
                     featsFragmentListener.nextFragmentAfterFeats()
                     true
                 }
@@ -59,7 +59,7 @@ class FeatsFragment(private val featsFragmentListener: FeatsFragmentListener) : 
     }
 
     private fun addSpell(){
-        //TODO: INSERT INTO DATABASE
+        dbHelper.insertFeats(charId, nameText.text.toString(), descText.text.toString(), prereqText.text.toString())
         nameText.text.clear()
         descText.text.clear()
         prereqText.text.clear()

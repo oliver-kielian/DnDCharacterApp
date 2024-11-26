@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import androidx.core.content.contentValuesOf
 
 class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object{
@@ -18,7 +19,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
                 character_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name STRING,
                 race STRING,
-                class STRING,
+                char_class STRING,
                 level INTEGER,
                 alignment STRING,
                 hit_points INTEGER,
@@ -48,6 +49,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
                 ideals STRING,
                 bonds STRING,
                 flaws STRING,
+                description STRING,
                 FOREIGN KEY(character_id) REFERENCES character(character_id)
             )
         """.trimIndent()
@@ -165,7 +167,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         val characterValues = ContentValues().apply {
             put("name", name)
             put("race", race)
-            put("class", char_class)
+            put("char_class", char_class)
             put("level", level)
             put("alignment", alignment)
             put("hit_points", hit_points)
@@ -181,7 +183,141 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         db.close()
     }
 
-    fun getCharacter(id: Int = -1, name: String = ""): Cursor {
+    fun insertAbility(charId: Int, name:String, desc:String, level:Int)
+    {
+        val db = this.readableDatabase
+        val abilityValues = ContentValues().apply {
+            put("character_id", charId)
+            put("name", name)
+            put("description", desc)
+            put("level_requirement", level)
+        }
+
+        db.insert("abilities", null, abilityValues)
+        db.close()
+    }
+
+    fun insertFeats(charId: Int, name:String, desc:String, prereq:String){
+        val db = this.readableDatabase
+
+        val featValues = ContentValues().apply {
+            put("character_id", charId)
+            put("name", name)
+            put("description", desc)
+            put("prerequisite", prereq)
+        }
+
+        db.insert("feats", null, featValues)
+        db.close()
+    }
+
+    fun insertInventory(charId: Int, name: String, quantity: Int, weight : Float, desc: String){
+        val db = this.readableDatabase
+
+        val itemValues = ContentValues().apply {
+            put("character_id", charId)
+            put("item_name", name)
+            put("quantity", quantity)
+            put("weight", weight)
+            put("description", desc)
+        }
+
+        db.insert("inventory", null, itemValues)
+        db.close()
+    }
+
+    fun insertSkill(charId: Int, name: String, proficient: Boolean, bonus: Int){
+        val db = this.readableDatabase
+        var proficientInt = 0
+        if(proficient)
+        {
+            proficientInt = 1
+        }
+
+        val skillValues = ContentValues().apply {
+            put("character_id", charId)
+            put("skills_name", name)
+            put("proficient", proficientInt)
+            put("bonus", bonus)
+        }
+
+        db.insert("skills", null, skillValues)
+        db.close()
+    }
+
+    fun insertNotes(charId: Int, text : String){
+        val db = this.readableDatabase
+
+        val noteValues = ContentValues().apply{
+            put("character_id", charId)
+            put("note_text", text)
+        }
+
+        db.insert("notes", null, noteValues)
+        db.close()
+    }
+
+    fun insertSpells(charId: Int, name: String, level: Int, school : String, castingTime : String, range: String, components : String, duration : String, desc: String){
+        val db = this.readableDatabase
+
+        val spellValues = ContentValues().apply{
+            put("character_id", charId)
+            put("spell_name", name)
+            put("level", level)
+            put("school", school)
+            put("casting_time", castingTime)
+            put("range", range)
+            put("components", components)
+            put("duration", duration)
+            put("description", desc)
+        }
+
+        db.insert("spells", null, spellValues)
+        db.close()
+    }
+
+    fun insertStats(charId: Int, strength : Int, strMod : Int, dex : Int, dexMod : Int, cons : Int, consMod : Int, int : Int, intMod : Int, wis : Int, wisMod : Int, char : Int, charMod : Int){
+        val db = this.readableDatabase
+
+        val statValues = ContentValues().apply{
+            put("character_id", charId)
+            put("strength", strength)
+            put("strength_modifier", strMod)
+            put("dexterity", dex)
+            put("dexterity_modifier", dexMod)
+            put("constitution", cons)
+            put("constitution_modifier", consMod)
+            put("intelligence", int)
+            put("intelligence_modifier", intMod)
+            put("wisdom", wis)
+            put("wisdom_modifier", wisMod)
+            put("charisma", char)
+            put("charisma_modifier", charMod)
+        }
+
+        db.insert("stats", null, statValues)
+        db.close()
+    }
+
+    fun insertBackground(charId: Int, name: String, personality_traits : String, ideals : String, bonds : String, flaws : String, desc: String){
+
+        val db = this.readableDatabase
+
+        val backgroundValues = ContentValues().apply{
+            put("character_id", charId)
+            put("name", name)
+            put("personality_traits", personality_traits)
+            put("ideals", ideals)
+            put("bonds", bonds)
+            put("flaws", flaws)
+            put("description", desc)
+        }
+
+        db.insert("background", null, backgroundValues)
+        db.close()
+    }
+
+    fun getCharacter(id: Int? = -1, name: String = ""): Cursor {
         val db = this.readableDatabase
         var cursor = db.query(
             "character",
@@ -193,7 +329,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
             null,
             null
         )
-        if(id == -1)
+        if(name == "")
         {
             cursor = db.query(
                 "character",
@@ -206,7 +342,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
                 null
             )
         }
-        else if(name == "")
+        else if(id == -1)
         {
             cursor = db.query(
                 "character",

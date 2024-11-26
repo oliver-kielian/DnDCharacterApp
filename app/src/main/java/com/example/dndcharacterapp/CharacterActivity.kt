@@ -2,6 +2,7 @@ package com.example.dndcharacterapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract.Data
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,8 @@ class CharacterActivity : AppCompatActivity(),
     NotesFragment.NotesFragmentListener{
 
         private lateinit var resultIntent : Intent
+        private var charID = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -38,7 +41,8 @@ class CharacterActivity : AppCompatActivity(),
         resultIntent = intent
     }
 
-    override fun nextFragmentFromCharacter() {
+    override fun nextFragmentFromCharacter(charID : Int) {
+        this.charID = charID
         val statsFragment = StatsFragment(this)
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.frameLayoutFields, statsFragment)
@@ -46,7 +50,7 @@ class CharacterActivity : AppCompatActivity(),
     }
 
     override fun nextFragmentAfterStats() {
-        val skillsFragment = SkillsFragment(this)
+        val skillsFragment = SkillsFragment(this, charID)
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.frameLayoutFields, skillsFragment)
         ft.commit()
@@ -60,35 +64,35 @@ class CharacterActivity : AppCompatActivity(),
     }
 
     override fun nextFragmentAfterBackground() {
-        val abilityFragment = AbilityFragment(this)
+        val abilityFragment = AbilityFragment(this, charID)
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.frameLayoutFields, abilityFragment)
         ft.commit()
     }
 
     override fun nextFragmentAfterAbility() {
-        val spellsFragment = SpellsFragment(this)
+        val spellsFragment = SpellsFragment(this, charID)
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.frameLayoutFields, spellsFragment)
         ft.commit()
     }
 
     override fun nextFragmentAfterSpells() {
-        val featsFragment = FeatsFragment(this)
+        val featsFragment = FeatsFragment(this, charID)
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.frameLayoutFields, featsFragment)
         ft.commit()
     }
 
     override fun nextFragmentAfterFeats() {
-        val inventoryFragment = InventoryFragment(this)
+        val inventoryFragment = InventoryFragment(this, charID)
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.frameLayoutFields, inventoryFragment)
         ft.commit()
     }
 
     override fun nextFragmentAfterInventory() {
-        val notesFragment = NotesFragment(this)
+        val notesFragment = NotesFragment(this, charID)
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.frameLayoutFields, notesFragment)
         ft.commit()

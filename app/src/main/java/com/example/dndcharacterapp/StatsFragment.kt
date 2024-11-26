@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 
-class StatsFragment(private val statsFragmentListener: StatsFragmentListener) : Fragment() {
+class StatsFragment(private val statsFragmentListener: StatsFragmentListener? = null, private val charID : Int) : Fragment() {
 
     interface StatsFragmentListener{
         fun nextFragmentAfterStats()
@@ -62,8 +62,20 @@ class StatsFragment(private val statsFragmentListener: StatsFragmentListener) : 
             when (item.itemId){
                 R.id.next ->
                 {
-                    //TODO: INSERT INTO DATABASE
-                    statsFragmentListener.nextFragmentAfterStats()
+                    dbHelper.insertStats(charID,
+                        strengthText.text.toString().toIntOrNull() ?: -1,
+                        strengthTextMod.text.toString().toIntOrNull() ?: -1,
+                        dexText.text.toString().toIntOrNull() ?: -1,
+                        dexTextMod.text.toString().toIntOrNull() ?: -1,
+                        constitutionText.text.toString().toIntOrNull() ?: -1,
+                        constitutionTextMod.text.toString().toIntOrNull() ?: -1,
+                        intText.text.toString().toIntOrNull() ?: -1,
+                        intTextMod.text.toString().toIntOrNull() ?: -1,
+                        wisText.text.toString().toIntOrNull() ?: -1,
+                        wisTextMod.text.toString().toIntOrNull() ?: -1,
+                        charismaText.text.toString().toIntOrNull() ?: -1,
+                        charismaTextMod.text.toString().toIntOrNull() ?: -1)
+                    statsFragmentListener?.nextFragmentAfterStats()
                     true
                 }
 

@@ -11,7 +11,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 
-class SkillsFragment(private val skillsFragmentListener: SkillsFragmentListener) : Fragment() {
+class SkillsFragment(private val skillsFragmentListener: SkillsFragmentListener, private val charID : Int) : Fragment() {
 
     interface SkillsFragmentListener{
         fun nextFragmentAfterSkills()
@@ -71,7 +71,9 @@ class SkillsFragment(private val skillsFragmentListener: SkillsFragmentListener)
             when (item.itemId){
                 R.id.next ->
                 {
-                    //TODO: INSERT INTO DATABASE
+                    dbHelper.insertSkill(charID,
+                        skillsNameTextView.text.toString(),
+                        checkBoxProficient.isChecked, bonusText.text.toString().toIntOrNull() ?: -1)
                     skillsFragmentListener.nextFragmentAfterSkills()
                     true
                 }
@@ -92,7 +94,9 @@ class SkillsFragment(private val skillsFragmentListener: SkillsFragmentListener)
         if(currentSkill != skills.size-1)
         {
             currentSkill++
-            //TODO: INSERT INTO DATABASE
+            dbHelper.insertSkill(charID,
+                skillsNameTextView.text.toString(),
+                checkBoxProficient.isChecked, bonusText.text.toString().toIntOrNull() ?: -1)
             skillsNameTextView.text = skills[currentSkill]
             checkBoxProficient.isChecked = false
             bonusText.text.clear()

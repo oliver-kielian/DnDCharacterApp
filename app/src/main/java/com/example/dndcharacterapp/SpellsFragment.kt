@@ -10,7 +10,7 @@ import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 import kotlin.time.Duration
 
-class SpellsFragment(private val spellsFragmentListener: SpellsFragmentListener) : Fragment() {
+class SpellsFragment(private val spellsFragmentListener: SpellsFragmentListener, private val charID : Int) : Fragment() {
 
     interface SpellsFragmentListener{
         fun nextFragmentAfterSpells()
@@ -56,7 +56,15 @@ class SpellsFragment(private val spellsFragmentListener: SpellsFragmentListener)
             when (item.itemId){
                 R.id.next ->
                 {
-                    //TODO: INSERT INTO DATABASE
+                    dbHelper.insertSpells(charID,
+                        spellNameText.text.toString(),
+                        levelText.text.toString().toIntOrNull() ?: -1,
+                        schoolText.text.toString(),
+                        castingTimeText.text.toString(),
+                        rangeText.text.toString(),
+                        componentsText.text.toString(),
+                        durationText.text.toString(),
+                        descText.text.toString())
                     spellsFragmentListener.nextFragmentAfterSpells()
                     true
                 }
@@ -70,7 +78,16 @@ class SpellsFragment(private val spellsFragmentListener: SpellsFragmentListener)
     }
 
     private fun addSpell(){
-        //TODO: INSERT INTO DATABASE
+        dbHelper.insertSpells(charID,
+            spellNameText.text.toString(),
+            levelText.text.toString().toIntOrNull() ?: -1,
+            schoolText.text.toString(),
+            castingTimeText.text.toString(),
+            rangeText.text.toString(),
+            componentsText.text.toString(),
+            durationText.text.toString(),
+            descText.text.toString())
+
         spellNameText.text.clear()
         levelText.text.clear()
         schoolText.text.clear()

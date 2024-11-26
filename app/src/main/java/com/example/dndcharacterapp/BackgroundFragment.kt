@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 
-class BackgroundFragment(private val backgroundFragmentListener: BackgroundFragmentListener) : Fragment() {
+class BackgroundFragment(private val backgroundFragmentListener: BackgroundFragmentListener, private val charID : Int) : Fragment() {
 
     interface BackgroundFragmentListener{
         fun nextFragmentAfterBackground()
@@ -20,6 +20,7 @@ class BackgroundFragment(private val backgroundFragmentListener: BackgroundFragm
     private lateinit var idealsText: EditText
     private lateinit var bondsText: EditText
     private lateinit var flawsText: EditText
+    private lateinit var descText: EditText
 
     private lateinit var dbHelper: DatabaseHelper
 
@@ -35,6 +36,7 @@ class BackgroundFragment(private val backgroundFragmentListener: BackgroundFragm
         idealsText = view.findViewById(R.id.editTextTextIdeals)
         bondsText = view.findViewById(R.id.editTextTextBonds)
         flawsText = view.findViewById(R.id.editTextTextFlaws)
+        descText = view.findViewById(R.id.editTextTextBackgroundDesc)
 
         nextToolbar = view.findViewById(R.id.toolbarBackground)
         nextToolbar.inflateMenu(R.menu.next_menu)
@@ -45,7 +47,13 @@ class BackgroundFragment(private val backgroundFragmentListener: BackgroundFragm
             when (item.itemId){
                 R.id.next ->
                 {
-                    //TODO: INSERT INTO DATABASE
+                    dbHelper.insertBackground(charID,
+                        backgroundNameText.text.toString(),
+                        personText.text.toString(),
+                        idealsText.text.toString(),
+                        bondsText.text.toString(),
+                        flawsText.text.toString(),
+                        descText.text.toString())
                     backgroundFragmentListener.nextFragmentAfterBackground()
                     true
                 }

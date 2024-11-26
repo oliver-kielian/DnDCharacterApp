@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 
-class InventoryFragment(private val inventoryFragmentListener: InventoryFragmentListener) : Fragment() {
+class InventoryFragment(private val inventoryFragmentListener: InventoryFragmentListener, private val charID : Int) : Fragment() {
 
     interface InventoryFragmentListener{
         fun nextFragmentAfterInventory()
@@ -49,7 +49,10 @@ class InventoryFragment(private val inventoryFragmentListener: InventoryFragment
             when (item.itemId){
                 R.id.next ->
                 {
-                    //TODO: INSERT INTO DATABASE
+                    dbHelper.insertInventory(charID, nameText.text.toString(),
+                        quantityText.text.toString().toIntOrNull() ?: -1,
+                        (weightText.text.toString().toFloatOrNull() ?: -1.0) as Float,
+                        descText.text.toString())
                     inventoryFragmentListener.nextFragmentAfterInventory()
                     true
                 }
@@ -63,7 +66,10 @@ class InventoryFragment(private val inventoryFragmentListener: InventoryFragment
     }
 
     private fun addItem(){
-        //TODO: INSERT INTO DATABASE
+        dbHelper.insertInventory(charID, nameText.text.toString(),
+            quantityText.text.toString().toIntOrNull() ?: -1,
+            (weightText.text.toString().toFloatOrNull() ?: -1.0) as Float,
+            descText.text.toString())
         nameText.text.clear()
         quantityText.text.clear()
         weightText.text.clear()
