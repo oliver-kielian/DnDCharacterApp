@@ -166,30 +166,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
 
        return cursor
     }
-
-    fun insertStats(charId: Int, strength : Int, strMod : Int, dex : Int, dexMod : Int, cons : Int, consMod : Int, int : Int, intMod : Int, wis : Int, wisMod : Int, char : Int, charMod : Int){
-        val db = this.readableDatabase
-
-        val statValues = ContentValues().apply{
-            put("character_id", charId)
-            put("strength", strength)
-            put("strength_modifier", strMod)
-            put("dexterity", dex)
-            put("dexterity_modifier", dexMod)
-            put("constitution", cons)
-            put("constitution_modifier", consMod)
-            put("intelligence", int)
-            put("intelligence_modifier", intMod)
-            put("wisdom", wis)
-            put("wisdom_modifier", wisMod)
-            put("charisma", char)
-            put("charisma_modifier", charMod)
-        }
-
-        db.insert("stats", null, statValues)
-        db.close()
-    }
-
 /************************************************ Abilities **************************************************/
     fun insertAbility(charId: Int, name:String, desc:String, level:Int)
     {
@@ -660,5 +636,85 @@ fun insertSpells(charId: Int, name: String, level: Int, school : String, casting
 
         db.update("spells", spellValues, where, args)
         db.close()
+    }
+
+/******************************************* Stats ****************************************/
+fun insertStats(charId: Int, strength : Int, strMod : Int, dex : Int, dexMod : Int, cons : Int, consMod : Int, int : Int, intMod : Int, wis : Int, wisMod : Int, char : Int, charMod : Int){
+    val db = this.readableDatabase
+
+    val statValues = ContentValues().apply{
+        put("character_id", charId)
+        put("strength", strength)
+        put("strength_modifier", strMod)
+        put("dexterity", dex)
+        put("dexterity_modifier", dexMod)
+        put("constitution", cons)
+        put("constitution_modifier", consMod)
+        put("intelligence", int)
+        put("intelligence_modifier", intMod)
+        put("wisdom", wis)
+        put("wisdom_modifier", wisMod)
+        put("charisma", char)
+        put("charisma_modifier", charMod)
+    }
+
+    db.insert("stats", null, statValues)
+    db.close()
+}
+
+    fun updateStats(statId : Int, strength : Int, strMod : Int, dex : Int, dexMod : Int, cons : Int, consMod : Int, int : Int, intMod : Int, wis : Int, wisMod : Int, char : Int, charMod : Int)
+    {
+        val db = this.readableDatabase
+
+        val statValues = ContentValues().apply{
+            put("strength", strength)
+            put("strength_modifier", strMod)
+            put("dexterity", dex)
+            put("dexterity_modifier", dexMod)
+            put("constitution", cons)
+            put("constitution_modifier", consMod)
+            put("intelligence", int)
+            put("intelligence_modifier", intMod)
+            put("wisdom", wis)
+            put("wisdom_modifier", wisMod)
+            put("charisma", char)
+            put("charisma_modifier", charMod)
+        }
+
+        val where = "stat_id"
+
+        val args = arrayOf(statId.toString())
+
+        db.update("stats", statValues, where, args)
+        db.close()
+    }
+
+    fun getStats(charId: Int) : Cursor{
+        val db = this.readableDatabase
+
+        val cursor = db.query(
+            "stats",
+            arrayOf("stat_id",
+                "strength",
+                "strength_modifier",
+                "dexterity",
+                "dexterity_modifier",
+                "constitution",
+                "constitution_modifier",
+                "intelligence",
+                "intelligence_modifier",
+                "wisdom",
+                "wisdom_modifier",
+                "charisma",
+                "charisma_modifier"),
+            "character_id = ?",
+            arrayOf(charId.toString()),
+            null,
+            null,
+            null,
+            null
+        )
+
+        return cursor
     }
 }

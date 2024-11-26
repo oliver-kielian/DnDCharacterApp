@@ -7,7 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class StatsFragment(private val statsFragmentListener: StatsFragmentListener? = null, private val charID : Int) : Fragment() {
@@ -33,6 +37,8 @@ class StatsFragment(private val statsFragmentListener: StatsFragmentListener? = 
 
     private lateinit var dbHelper: DatabaseHelper
 
+    private var statId = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,11 +60,101 @@ class StatsFragment(private val statsFragmentListener: StatsFragmentListener? = 
         charismaText = view.findViewById(R.id.editTextNumberCharisma)
         charismaTextMod = view.findViewById(R.id.editTextNumberCharismaMod)
 
-        nextToolbar = view.findViewById(R.id.toolbarNextStats)
-        nextToolbar.inflateMenu(R.menu.next_menu)
-
         dbHelper = context?.let { DatabaseHelper(it) }!!
 
+        nextToolbar = view.findViewById(R.id.toolbarNextStats)
+
+        if(statsFragmentListener != null){
+            addCharacterLogic()
+        }
+        else{
+            updateCharacterLogic()
+        }
+
+        return view
+    }
+
+    private fun updateCharacterLogic() {
+        rollButton.isEnabled = false
+        nextToolbar.inflateMenu(R.menu.update_menu)
+
+        nextToolbar.setOnMenuItemClickListener {
+                item ->
+            when (item.itemId) {
+                R.id.update -> {
+                    lifecycleScope.launch(Dispatchers.IO){
+                        dbHelper.updateStats(statId,
+                            strengthText.text.toString().toIntOrNull() ?: -1,
+                            strengthTextMod.text.toString().toIntOrNull() ?: -1,
+                            dexText.text.toString().toIntOrNull() ?: -1,
+                            dexTextMod.text.toString().toIntOrNull() ?: -1,
+                            constitutionText.text.toString().toIntOrNull() ?: -1,
+                            constitutionTextMod.text.toString().toIntOrNull() ?: -1,
+                            intText.text.toString().toIntOrNull() ?: -1,
+                            intTextMod.text.toString().toIntOrNull() ?: -1,
+                            wisText.text.toString().toIntOrNull() ?: -1,
+                            wisTextMod.text.toString().toIntOrNull() ?: -1,
+                            charismaText.text.toString().toIntOrNull() ?: -1,
+                            charismaTextMod.text.toString().toIntOrNull() ?: -1)
+                    }
+                    true
+                }
+                R.id.add ->
+                {
+                    Toast.makeText(context, "All stats on page", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.clear ->{
+                    Toast.makeText(context, "All stats on page", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        val cursor = dbHelper.getStats(charID)
+
+        if (cursor.moveToFirst())
+        {
+            val index = cursor.getColumnIndex("stat_id")
+            statId = cursor.getInt(index)
+
+            val strIndex = cursor.getColumnIndex("strength")
+            val strModIndex = cursor.getColumnIndex("strength_modifier")
+            val dexIndex = cursor.getColumnIndex("dexterity")
+            val dexModIndex = cursor.getColumnIndex("dexterity_modifier")
+            val consIndex = cursor.getColumnIndex("constitution")
+            val consModIndex = cursor.getColumnIndex("constitution_modifier")
+            val intIndex = cursor.getColumnIndex("intelligence")
+            val intModIndex = cursor.getColumnIndex("intelligence_modifier")
+            val wisIndex = cursor.getColumnIndex("wisdom")
+            val wisModIndex = cursor.getColumnIndex("wisdom_modifier")
+            val charIndex = cursor.getColumnIndex("charisma")
+            val charModIndex = cursor.getColumnIndex("charisma_modifier")
+
+            strengthText.setText(cursor.getInt(strIndex).toString())
+            strengthTextMod.setText(cursor.getInt(strModIndex).toString())
+
+            dexText.setText(cursor.getInt(dexIndex).toString())
+            dexTextMod.setText(cursor.getInt(dexModIndex).toString())
+
+            constitutionText.setText(cursor.getInt(consIndex).toString())
+            constitutionTextMod.setText(cursor.getInt(consModIndex).toString())
+
+            intText.setText(cursor.getInt(intIndex).toString())
+            intTextMod.setText(cursor.getInt(intModIndex).toString())
+
+            wisText.setText(cursor.getInt(wisIndex).toString())
+            wisTextMod.setText(cursor.getInt(wisModIndex).toString())
+
+            charismaText.setText(cursor.getInt(charIndex).toString())
+            charismaTextMod.setText(cursor.getInt(charModIndex).toString())
+
+        }
+    }
+
+    private fun addCharacterLogic() {
+        nextToolbar.inflateMenu(R.menu.next_menu)
         nextToolbar.setOnMenuItemClickListener { item ->
             when (item.itemId){
                 R.id.next ->
@@ -85,7 +181,6 @@ class StatsFragment(private val statsFragmentListener: StatsFragmentListener? = 
         }
 
         rollButton.setOnClickListener{roll()}
-        return view
     }
 
     private fun roll() {
