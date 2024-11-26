@@ -168,23 +168,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
     }
 
 
-    fun insertInventory(charId: Int, name: String, quantity: Int, weight : Float, desc: String){
-        val db = this.readableDatabase
-
-        val itemValues = ContentValues().apply {
-            put("character_id", charId)
-            put("item_name", name)
-            put("quantity", quantity)
-            put("weight", weight)
-            put("description", desc)
-        }
-
-        db.insert("inventory", null, itemValues)
-        db.close()
-    }
-
-
-
     fun insertSpells(charId: Int, name: String, level: Int, school : String, castingTime : String, range: String, components : String, duration : String, desc: String){
         val db = this.readableDatabase
 
@@ -584,6 +567,60 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         val args = arrayOf(skillId.toString())
 
         db.update("skills", skillValues, where, args)
+        db.close()
+    }
+
+/********************************************************* Inventory **********************************************************************/
+
+    fun insertInventory(charId: Int, name: String, quantity: Int, weight : Float, desc: String){
+        val db = this.readableDatabase
+
+        val itemValues = ContentValues().apply {
+            put("character_id", charId)
+            put("item_name", name)
+            put("quantity", quantity)
+            put("weight", weight)
+            put("description", desc)
+        }
+
+        db.insert("inventory", null, itemValues)
+        db.close()
+    }
+
+    fun getInventory(charId: Int) : Cursor
+    {
+        val db = this.readableDatabase
+
+        val cursor = db.query(
+            "inventory",
+            arrayOf("item_id", "item_name", "quantity", "weight", "description"),
+            "character_id = ?",
+            arrayOf(charId.toString()),
+            null,
+            null,
+            null,
+            null
+        )
+
+        return cursor
+    }
+
+    fun updateInventory(itemID: Int, name: String, quantity: Int, weight : Float, desc: String)
+    {
+        val db = this.readableDatabase
+
+        val itemValues = ContentValues().apply {
+            put("item_name", name)
+            put("quantity", quantity)
+            put("weight", weight)
+            put("description", desc)
+        }
+
+        val where = "item_id = ?"
+
+        val args = arrayOf(itemID.toString())
+
+        db.update("inventory", itemValues, where, args)
         db.close()
     }
 }

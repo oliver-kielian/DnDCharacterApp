@@ -1,5 +1,6 @@
 package com.example.dndcharacterapp
 
+import android.database.Cursor
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class InventoryFragment(private val inventoryFragmentListener: InventoryFragmentListener? = null, private val charID : Int) : Fragment() {
 
@@ -26,6 +30,8 @@ class InventoryFragment(private val inventoryFragmentListener: InventoryFragment
 
     private lateinit var dbHelper: DatabaseHelper
 
+    private var itemId = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +49,98 @@ class InventoryFragment(private val inventoryFragmentListener: InventoryFragment
 
         dbHelper = context?.let { DatabaseHelper(it) }!!
 
+        if(inventoryFragmentListener != null){
+            addCharacterLogic()
+        }
+        else{
+            updateCharacterLogic()
+        }
+
+
+        return view
+    }
+
+    private fun updateCharacterLogic() {
+        addButton.setText("Next Item")
+        nextToolbar.inflateMenu(R.menu.update_menu)
+
+        nextToolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.update -> {
+                    lifecycleScope.launch(Dispatchers.IO){
+                        dbHelper.updateInventory(itemId,
+                            nameText.text.toString(),
+                            quantityText.text.toString().toIntOrNull() ?: -1,
+                            weightText.text.toString().toFloatOrNull() ?: -1.0f,
+                            descText.text.toString())
+                    }
+                    true
+                }
+                R.id.add ->
+                {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        dbHelper.insertInventory(charID, nameText.text.toString(),
+                            quantityText.text.toString().toIntOrNull() ?: -1,
+                            weightText.text.toString().toFloatOrNull() ?: -1.0f,
+                            descText.text.toString())
+                    }
+                    true
+                }
+                R.id.clear ->{
+                    nameText.text.clear()
+                    quantityText.text.clear()
+                    weightText.text.clear()
+                    descText.text.clear()
+
+                    true
+                }
+                else -> false
+            }
+        }
+        val cursor = dbHelper.getInventory(charID)
+
+        if(cursor.moveToFirst()) {
+
+            val index = cursor.getColumnIndex("item_id")
+            itemId = cursor.getInt(index)
+
+            val nameIndex = cursor.getColumnIndex("item_name")
+            val quantityIndex = cursor.getColumnIndex("quantity")
+            val weightIndex = cursor.getColumnIndex("weight")
+            val descIndex = cursor.getColumnIndex("description")
+
+            nameText.setText(cursor.getString(nameIndex))
+            quantityText.setText(cursor.getInt(quantityIndex).toString())
+            weightText.setText(cursor.getFloat(weightIndex).toString())
+            descText.setText(cursor.getString(descIndex))
+
+            cursor.moveToNext()
+
+            addButton.setOnClickListener { nextAbility(cursor) }
+
+        }
+    }
+
+    private fun nextAbility(cursor: Cursor) {
+        if(!cursor.isAfterLast){
+            val nameIndex = cursor.getColumnIndex("item_name")
+            val quantityIndex = cursor.getColumnIndex("quantity")
+            val weightIndex = cursor.getColumnIndex("weight")
+            val descIndex = cursor.getColumnIndex("description")
+
+            nameText.setText(cursor.getString(nameIndex))
+            quantityText.setText(cursor.getInt(quantityIndex).toString())
+            weightText.setText(cursor.getFloat(weightIndex).toString())
+            descText.setText(cursor.getString(descIndex))
+
+            cursor.moveToNext()
+        }
+        else{
+            cursor.close()
+        }
+    }
+
+    private fun addCharacterLogic() {
         nextToolbar.inflateMenu(R.menu.next_menu)
 
         nextToolbar.setOnMenuItemClickListener { item ->
@@ -62,7 +160,6 @@ class InventoryFragment(private val inventoryFragmentListener: InventoryFragment
         }
 
         addButton.setOnClickListener{addItem()}
-        return view
     }
 
     private fun addItem(){
