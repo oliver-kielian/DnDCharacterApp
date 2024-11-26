@@ -81,6 +81,8 @@ class MainActivity : AppCompatActivity(), ItemAdapter.ItemAdapterListener {
     }
 
     override fun click(id: Int) {
-
+        val intent = Intent(applicationContext, CharacterDetailActivity::class.java)
+        intent.putExtra("ID", id)
+        startActivity(intent)
     }
 }
