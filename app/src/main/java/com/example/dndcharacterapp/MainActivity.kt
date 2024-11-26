@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(), ItemAdapter.ItemAdapterListener {
         }
     }
 
-    override fun click(position: Int) {
+    override fun click(id: Int) {
 
     }
 }

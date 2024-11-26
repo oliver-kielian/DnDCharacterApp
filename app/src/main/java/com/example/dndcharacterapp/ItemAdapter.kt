@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 class ItemAdapter(private var cursor : Cursor, private val itemAdapterListener: ItemAdapterListener): RecyclerView.Adapter<ItemAdapter.ViewHolder>(){
 
     interface ItemAdapterListener {
-        fun click(position: Int)
+        fun click(id: Int)
     }
 
     class ViewHolder(view: View, private val itemAdapterListener: ItemAdapterListener): RecyclerView.ViewHolder(view) {
