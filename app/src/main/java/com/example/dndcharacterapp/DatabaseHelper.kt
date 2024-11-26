@@ -167,28 +167,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
        return cursor
     }
 
-    fun insertCharacter(name:String, race:String, char_class:String, level:Int, alignment:String, hit_points:Int, max_hit_points:Int, armor_class:Int, speed:Int, bday:String, image:String){
-        val db = this.readableDatabase
-
-        val characterValues = ContentValues().apply {
-            put("name", name)
-            put("race", race)
-            put("char_class", char_class)
-            put("level", level)
-            put("alignment", alignment)
-            put("hit_points", hit_points)
-            put("max_hit_points", max_hit_points)
-            put("armor_class", armor_class)
-            put("speed", speed)
-            put("birthday", bday)
-            put("image", image)
-        }
-
-        db.insert("character", null, characterValues)
-        db.close()
-    }
-
-
     fun insertFeats(charId: Int, name:String, desc:String, prereq:String){
         val db = this.readableDatabase
 
@@ -280,51 +258,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         db.close()
     }
 
-
-    fun getCharacterByName(name: String): Cursor {
-        val db = this.readableDatabase
-        var cursor = db.query(
-                "character",
-                arrayOf("character_id", "name"),
-                "name = ?",
-                arrayOf(name),
-                null,
-                null,
-                null,
-                null
-            )
-
-        return cursor
-    }
-
-    fun getCharacterByID(charId: Int) : Cursor{
-        val db = this.readableDatabase
-        val cursor = db.query(
-            "character",
-            arrayOf(
-                "character_id",
-                "name",
-                "race",
-                "char_class",
-                "level",
-                "alignment",
-                "hit_points",
-                "max_hit_points",
-                "armor_class",
-                "speed",
-                "birthday",
-                "image"
-            ),
-            "character_id = ?",
-            arrayOf(charId.toString()),
-            null,
-            null,
-            null,
-            null
-        )
-
-        return cursor
-    }
 /************************************************ Abilities **************************************************/
     fun insertAbility(charId: Int, name:String, desc:String, level:Int)
     {
@@ -483,6 +416,97 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         val args = arrayOf(backgroundID.toString())
 
         db.update("background", background, where, args)
+        db.close()
+    }
+/**************************************************************** Character ****************************************************************/
+    fun getCharacterByName(name: String): Cursor {
+        val db = this.readableDatabase
+        var cursor = db.query(
+            "character",
+            arrayOf("character_id", "name"),
+            "name = ?",
+            arrayOf(name),
+            null,
+            null,
+            null,
+            null
+        )
+
+        return cursor
+    }
+
+    fun getCharacterByID(charId: Int) : Cursor{
+        val db = this.readableDatabase
+        val cursor = db.query(
+            "character",
+            arrayOf(
+                "character_id",
+                "name",
+                "race",
+                "char_class",
+                "level",
+                "alignment",
+                "hit_points",
+                "max_hit_points",
+                "armor_class",
+                "speed",
+                "birthday",
+                "image"
+            ),
+            "character_id = ?",
+            arrayOf(charId.toString()),
+            null,
+            null,
+            null,
+            null
+        )
+
+        return cursor
+    }
+
+    fun insertCharacter(name:String, race:String, char_class:String, level:Int, alignment:String, hit_points:Int, max_hit_points:Int, armor_class:Int, speed:Int, bday:String, image:String){
+        val db = this.readableDatabase
+
+        val characterValues = ContentValues().apply {
+            put("name", name)
+            put("race", race)
+            put("char_class", char_class)
+            put("level", level)
+            put("alignment", alignment)
+            put("hit_points", hit_points)
+            put("max_hit_points", max_hit_points)
+            put("armor_class", armor_class)
+            put("speed", speed)
+            put("birthday", bday)
+            put("image", image)
+        }
+
+        db.insert("character", null, characterValues)
+        db.close()
+    }
+
+    fun updateCharacter(charId: Int, name:String, race:String, char_class:String, level:Int, alignment:String, hit_points:Int, max_hit_points:Int, armor_class:Int, speed:Int, bday:String, image:String)
+    {
+        val db = this.readableDatabase
+
+        val characterValues = ContentValues().apply {
+            put("name", name)
+            put("race", race)
+            put("char_class", char_class)
+            put("level", level)
+            put("alignment", alignment)
+            put("hit_points", hit_points)
+            put("max_hit_points", max_hit_points)
+            put("armor_class", armor_class)
+            put("speed", speed)
+            put("birthday", bday)
+            put("image", image)
+        }
+
+        val where = "character_id = ?"
+        val args = arrayOf(charId.toString())
+
+        db.update("character", characterValues, where, args)
         db.close()
     }
 }

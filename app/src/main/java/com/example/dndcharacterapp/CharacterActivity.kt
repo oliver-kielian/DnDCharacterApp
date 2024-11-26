@@ -33,7 +33,7 @@ class CharacterActivity : AppCompatActivity(),
             insets
         }
 
-        val characterFragment = CharacterFragment(this)
+        val characterFragment = CharacterFragment(this, null)
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.frameLayoutFields, characterFragment)
         ft.commit()

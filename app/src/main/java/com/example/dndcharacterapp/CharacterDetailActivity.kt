@@ -38,7 +38,6 @@ class CharacterDetailActivity : AppCompatActivity() {
 
         val intent = intent
         charID = intent.getIntExtra("ID", 0)
-        Log.d("CharacterID", "Query: $charID")
 
         setCharacterImage()
     }
@@ -56,7 +55,7 @@ class CharacterDetailActivity : AppCompatActivity() {
     fun go(view: View) {
         when (tables.selectedItem.toString()){
                 "Character"->{
-                    val characterFragment = CharacterFragment()
+                    val characterFragment = CharacterFragment(null, charID)
                     val ft = supportFragmentManager.beginTransaction()
                     ft.replace(R.id.tables, characterFragment)
                     ft.commit()
