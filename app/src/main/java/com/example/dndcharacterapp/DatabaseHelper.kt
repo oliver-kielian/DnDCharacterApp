@@ -328,26 +328,26 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
             null,
             null
         )
-        if(name == "")
-        {
-            cursor = db.query(
-                "character",
-                arrayOf("character_id", "name"),
-                "character_id = ?",
-                arrayOf(id.toString()),
-                null,
-                null,
-                null,
-                null
-            )
-        }
-        else if(id == -1)
+        if(id == -1)
         {
             cursor = db.query(
                 "character",
                 arrayOf("character_id", "name"),
                 "name = ?",
                 arrayOf(name),
+                null,
+                null,
+                null,
+                null
+            )
+        }
+        else if(name == "")
+        {
+            cursor = db.query(
+                "character",
+                arrayOf("character_id", "name", "race", "char_class", "level", "alignment", "hit_points", "max_hit_points", "armor_class", "speed", "birthday", "image"),
+                "character_id = ?",
+                arrayOf(id.toString()),
                 null,
                 null,
                 null,

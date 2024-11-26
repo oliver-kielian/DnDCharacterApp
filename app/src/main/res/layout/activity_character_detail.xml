@@ -18,12 +18,26 @@
             android:layout_width="200dp"
             android:layout_height="200dp" />
 
-        <Spinner
-            android:id="@+id/spinnerTables"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:entries="@array/tables"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <Spinner
+                android:id="@+id/spinnerTables"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:entries="@array/tables"/>
+
+            <Button
+                android:id="@+id/buttonGo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="@string/go"
+                android:onClick="go"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
