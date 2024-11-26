@@ -1,15 +1,18 @@
 package com.example.dndcharacterapp
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.DatePicker
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 
-class CharacterFragment(private val characterFragmentListener: CharacterFragmentListener? = null) : Fragment() {
+
+class CharacterFragment(private val characterFragmentListener: CharacterFragmentListener? = null) : Fragment(), DatePickerDialog.OnDateSetListener{
 
     interface CharacterFragmentListener {
         fun nextFragmentFromCharacter(charID: Int)
@@ -31,7 +34,7 @@ class CharacterFragment(private val characterFragmentListener: CharacterFragment
 
     private lateinit var dbHelper: DatabaseHelper
 
-    var bday = "0"
+    private var bday = "0"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,6 +95,11 @@ class CharacterFragment(private val characterFragmentListener: CharacterFragment
     }
 
     private fun pickBday() {
-        TODO("Not yet implemented")
+        val dateFragment = DateFragment(this)
+        dateFragment.show(parentFragmentManager, null)
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        bday = String.format("%d/%d/%d", month, dayOfMonth, year)
     }
 }
