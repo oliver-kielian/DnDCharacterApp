@@ -167,26 +167,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
        return cursor
     }
 
-
-    fun insertSpells(charId: Int, name: String, level: Int, school : String, castingTime : String, range: String, components : String, duration : String, desc: String){
-        val db = this.readableDatabase
-
-        val spellValues = ContentValues().apply{
-            put("character_id", charId)
-            put("spell_name", name)
-            put("level", level)
-            put("school", school)
-            put("casting_time", castingTime)
-            put("range", range)
-            put("components", components)
-            put("duration", duration)
-            put("description", desc)
-        }
-
-        db.insert("spells", null, spellValues)
-        db.close()
-    }
-
     fun insertStats(charId: Int, strength : Int, strMod : Int, dex : Int, dexMod : Int, cons : Int, consMod : Int, int : Int, intMod : Int, wis : Int, wisMod : Int, char : Int, charMod : Int){
         val db = this.readableDatabase
 
@@ -621,6 +601,64 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         val args = arrayOf(itemID.toString())
 
         db.update("inventory", itemValues, where, args)
+        db.close()
+    }
+
+/************************************************** Spells **************************************************/
+fun insertSpells(charId: Int, name: String, level: Int, school : String, castingTime : String, range: String, components : String, duration : String, desc: String){
+    val db = this.readableDatabase
+
+    val spellValues = ContentValues().apply{
+        put("character_id", charId)
+        put("spell_name", name)
+        put("level", level)
+        put("school", school)
+        put("casting_time", castingTime)
+        put("range", range)
+        put("components", components)
+        put("duration", duration)
+        put("description", desc)
+    }
+
+    db.insert("spells", null, spellValues)
+    db.close()
+}
+    fun getSpell(charId: Int) : Cursor{
+        val db = this.readableDatabase
+
+        val cursor = db.query(
+            "spells",
+            arrayOf("spell_id", "spell_name", "level", "school", "casting_time", "range", "components", "duration", "description"),
+            "character_id = ?",
+            arrayOf(charId.toString()),
+            null,
+            null,
+            null,
+            null
+        )
+
+        return cursor
+    }
+
+    fun updateSpell(spellId: Int, name: String, level: Int, school : String, castingTime : String, range: String, components : String, duration : String, desc: String){
+        val db = this.readableDatabase
+
+        val spellValues = ContentValues().apply{
+            put("spell_name", name)
+            put("level", level)
+            put("school", school)
+            put("casting_time", castingTime)
+            put("range", range)
+            put("components", components)
+            put("duration", duration)
+            put("description", desc)
+        }
+
+        val where = "spell_id = ?"
+
+        val args = arrayOf(spellId.toString())
+
+        db.update("spells", spellValues, where, args)
         db.close()
     }
 }

@@ -116,12 +116,12 @@ class InventoryFragment(private val inventoryFragmentListener: InventoryFragment
 
             cursor.moveToNext()
 
-            addButton.setOnClickListener { nextAbility(cursor) }
+            addButton.setOnClickListener { nextItem(cursor) }
 
         }
     }
 
-    private fun nextAbility(cursor: Cursor) {
+    private fun nextItem(cursor: Cursor) {
         if(!cursor.isAfterLast){
             val nameIndex = cursor.getColumnIndex("item_name")
             val quantityIndex = cursor.getColumnIndex("quantity")
