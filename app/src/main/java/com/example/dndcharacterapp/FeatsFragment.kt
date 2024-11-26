@@ -137,7 +137,14 @@ class FeatsFragment(private val featsFragmentListener: FeatsFragmentListener? = 
             when (item.itemId){
                 R.id.next ->
                 {
-                    dbHelper.insertFeats(charId, nameText.text.toString(), descText.text.toString(), prereqText.text.toString())
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        dbHelper.insertFeats(
+                            charId,
+                            nameText.text.toString(),
+                            descText.text.toString(),
+                            prereqText.text.toString()
+                        )
+                    }
                     featsFragmentListener?.nextFragmentAfterFeats()
                     true
                 }
@@ -150,7 +157,14 @@ class FeatsFragment(private val featsFragmentListener: FeatsFragmentListener? = 
     }
 
     private fun addSpell(){
-        dbHelper.insertFeats(charId, nameText.text.toString(), descText.text.toString(), prereqText.text.toString())
+        lifecycleScope.launch(Dispatchers.IO) {
+            dbHelper.insertFeats(
+                charId,
+                nameText.text.toString(),
+                descText.text.toString(),
+                prereqText.text.toString()
+            )
+        }
         nameText.text.clear()
         descText.text.clear()
         prereqText.text.clear()

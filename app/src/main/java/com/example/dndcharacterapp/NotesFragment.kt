@@ -138,7 +138,9 @@ class NotesFragment(private val notesFragmentListener: NotesFragmentListener? = 
     }
 
     private fun addNote(){
-        dbHelper.insertNotes(charID, noteText.text.toString())
+        lifecycleScope.launch(Dispatchers.IO) {
+            dbHelper.insertNotes(charID, noteText.text.toString())
+        }
         noteText.text.clear()
     }
 

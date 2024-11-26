@@ -185,15 +185,19 @@ class SpellsFragment(private val spellsFragmentListener: SpellsFragmentListener?
             when (item.itemId){
                 R.id.next ->
                 {
-                    dbHelper.insertSpells(charID,
-                        spellNameText.text.toString(),
-                        levelText.text.toString().toIntOrNull() ?: -1,
-                        schoolText.text.toString(),
-                        castingTimeText.text.toString(),
-                        rangeText.text.toString(),
-                        componentsText.text.toString(),
-                        durationText.text.toString(),
-                        descText.text.toString())
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        dbHelper.insertSpells(
+                            charID,
+                            spellNameText.text.toString(),
+                            levelText.text.toString().toIntOrNull() ?: -1,
+                            schoolText.text.toString(),
+                            castingTimeText.text.toString(),
+                            rangeText.text.toString(),
+                            componentsText.text.toString(),
+                            durationText.text.toString(),
+                            descText.text.toString()
+                        )
+                    }
                     spellsFragmentListener?.nextFragmentAfterSpells()
                     true
                 }
@@ -206,15 +210,19 @@ class SpellsFragment(private val spellsFragmentListener: SpellsFragmentListener?
     }
 
     private fun addSpell(){
-        dbHelper.insertSpells(charID,
-            spellNameText.text.toString(),
-            levelText.text.toString().toIntOrNull() ?: -1,
-            schoolText.text.toString(),
-            castingTimeText.text.toString(),
-            rangeText.text.toString(),
-            componentsText.text.toString(),
-            durationText.text.toString(),
-            descText.text.toString())
+        lifecycleScope.launch(Dispatchers.IO) {
+            dbHelper.insertSpells(
+                charID,
+                spellNameText.text.toString(),
+                levelText.text.toString().toIntOrNull() ?: -1,
+                schoolText.text.toString(),
+                castingTimeText.text.toString(),
+                rangeText.text.toString(),
+                componentsText.text.toString(),
+                durationText.text.toString(),
+                descText.text.toString()
+            )
+        }
 
         spellNameText.text.clear()
         levelText.text.clear()

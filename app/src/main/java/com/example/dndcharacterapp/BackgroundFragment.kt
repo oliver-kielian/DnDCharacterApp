@@ -121,13 +121,17 @@ class BackgroundFragment(private val backgroundFragmentListener: BackgroundFragm
             when (item.itemId){
                 R.id.next ->
                 {
-                    dbHelper.insertBackground(charID,
-                        backgroundNameText.text.toString(),
-                        personText.text.toString(),
-                        idealsText.text.toString(),
-                        bondsText.text.toString(),
-                        flawsText.text.toString(),
-                        descText.text.toString())
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        dbHelper.insertBackground(
+                            charID,
+                            backgroundNameText.text.toString(),
+                            personText.text.toString(),
+                            idealsText.text.toString(),
+                            bondsText.text.toString(),
+                            flawsText.text.toString(),
+                            descText.text.toString()
+                        )
+                    }
                     backgroundFragmentListener?.nextFragmentAfterBackground()
                     true
                 }

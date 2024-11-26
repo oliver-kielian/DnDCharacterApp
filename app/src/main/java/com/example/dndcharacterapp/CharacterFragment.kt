@@ -161,18 +161,21 @@ class CharacterFragment(private val characterFragmentListener: CharacterFragment
             when (item.itemId){
                 R.id.next ->
                 {
-                    dbHelper.insertCharacter(nameText.text.toString(),
-                        raceText.text.toString(),
-                        classText.text.toString(),
-                        levelText.text.toString().toIntOrNull() ?: -1,
-                        alignmentText.text.toString(),
-                        hitPointsText.text.toString().toIntOrNull() ?: -1,
-                        maxHitPointsText.text.toString().toIntOrNull() ?: -1,
-                        armorClassText.text.toString().toIntOrNull() ?: -1,
-                        speedText.text.toString().toIntOrNull() ?: -1,
-                        bday,
-                        imageText.text.toString())
-
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        dbHelper.insertCharacter(
+                            nameText.text.toString(),
+                            raceText.text.toString(),
+                            classText.text.toString(),
+                            levelText.text.toString().toIntOrNull() ?: -1,
+                            alignmentText.text.toString(),
+                            hitPointsText.text.toString().toIntOrNull() ?: -1,
+                            maxHitPointsText.text.toString().toIntOrNull() ?: -1,
+                            armorClassText.text.toString().toIntOrNull() ?: -1,
+                            speedText.text.toString().toIntOrNull() ?: -1,
+                            bday,
+                            imageText.text.toString()
+                        )
+                    }
                     val cursor = dbHelper.getCharacterByName(nameText.text.toString())
                     cursor.moveToFirst()
                     val index = cursor.getColumnIndex("character_id")
