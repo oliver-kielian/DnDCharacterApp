@@ -183,24 +183,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         db.close()
     }
 
-    fun insertSkill(charId: Int, name: String, proficient: Boolean, bonus: Int){
-        val db = this.readableDatabase
-        var proficientInt = 0
-        if(proficient)
-        {
-            proficientInt = 1
-        }
-
-        val skillValues = ContentValues().apply {
-            put("character_id", charId)
-            put("skills_name", name)
-            put("proficient", proficientInt)
-            put("bonus", bonus)
-        }
-
-        db.insert("skills", null, skillValues)
-        db.close()
-    }
 
 
     fun insertSpells(charId: Int, name: String, level: Int, school : String, castingTime : String, range: String, components : String, duration : String, desc: String){
@@ -545,5 +527,63 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         )
 
         return cursor
+    }
+
+/**************************************** Skills **************************************************/
+    fun insertSkill(charId: Int, name: String, proficient: Boolean, bonus: Int){
+        val db = this.readableDatabase
+        var proficientInt = 0
+        if(proficient)
+        {
+            proficientInt = 1
+        }
+
+        val skillValues = ContentValues().apply {
+            put("character_id", charId)
+            put("skills_name", name)
+            put("proficient", proficientInt)
+            put("bonus", bonus)
+        }
+
+        db.insert("skills", null, skillValues)
+        Log.d("SKILLSS NAME", "$charId")
+        db.close()
+    }
+
+    fun getSkill(charId: Int) : Cursor{
+        val db = this.readableDatabase
+
+        val cursor = db.query(
+            "skills",
+            arrayOf("skills_id", "skills_name", "proficient", "bonus"),
+            "character_id = ?",
+            arrayOf(charId.toString()),
+            null,
+            null,
+            null,
+            null
+        )
+
+        return cursor
+    }
+
+    fun updateSkill(skillId : Int, proficient: Boolean, bonus: Int){
+        val db = this.readableDatabase
+        var proficientInt = 0
+        if(proficient)
+        {
+            proficientInt = 1
+        }
+
+        val skillValues = ContentValues().apply {
+            put("proficient", proficientInt)
+            put("bonus", bonus)
+        }
+
+        val where = "skills_id = ?"
+        val args = arrayOf(skillId.toString())
+
+        db.update("skills", skillValues, where, args)
+        db.close()
     }
 }
