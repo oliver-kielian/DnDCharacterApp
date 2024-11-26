@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
+import kotlin.random.Random
 
 class StatsFragment(private val statsFragmentListener: StatsFragmentListener? = null, private val charID : Int) : Fragment() {
 
@@ -83,6 +84,30 @@ class StatsFragment(private val statsFragmentListener: StatsFragmentListener? = 
             }
         }
 
+        rollButton.setOnClickListener{roll()}
         return view
+    }
+
+    private fun roll() {
+        val scores = mutableListOf<Int>()
+        for (i in 1..6)
+        {
+            val diceList = mutableListOf<Int>()
+            diceList.add(Random.nextInt(1,7))
+            diceList.add(Random.nextInt(1,7))
+            diceList.add(Random.nextInt(1,7))
+            diceList.add(Random.nextInt(1,7))
+
+            diceList.sortDescending()
+
+             scores.add(diceList[0]+diceList[1]+diceList[2])
+        }
+
+        strengthText.setText(scores[0].toString())
+        dexText.setText(scores[1].toString())
+        constitutionText.setText(scores[2].toString())
+        intText.setText(scores[3].toString())
+        wisText.setText(scores[4].toString())
+        charismaText.setText(scores[5].toString())
     }
 }
