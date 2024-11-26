@@ -51,7 +51,7 @@ class InventoryFragment(private val inventoryFragmentListener: InventoryFragment
                 {
                     dbHelper.insertInventory(charID, nameText.text.toString(),
                         quantityText.text.toString().toIntOrNull() ?: -1,
-                        (weightText.text.toString().toFloatOrNull() ?: -1.0) as Float,
+                        weightText.text.toString().toFloatOrNull() ?: -1.0f,
                         descText.text.toString())
                     inventoryFragmentListener?.nextFragmentAfterInventory()
                     true
@@ -68,7 +68,7 @@ class InventoryFragment(private val inventoryFragmentListener: InventoryFragment
     private fun addItem(){
         dbHelper.insertInventory(charID, nameText.text.toString(),
             quantityText.text.toString().toIntOrNull() ?: -1,
-            (weightText.text.toString().toFloatOrNull() ?: -1.0) as Float,
+            weightText.text.toString().toFloatOrNull() ?: -1.0f,
             descText.text.toString())
         nameText.text.clear()
         quantityText.text.clear()

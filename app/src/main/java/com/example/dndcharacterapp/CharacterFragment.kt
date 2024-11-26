@@ -73,7 +73,6 @@ class CharacterFragment(private val characterFragmentListener: CharacterFragment
                         hitPointsText.text.toString().toIntOrNull() ?: -1,
                         maxHitPointsText.text.toString().toIntOrNull() ?: -1,
                         armorClassText.text.toString().toIntOrNull() ?: -1,
-                        proficiencyText.text.toString().toIntOrNull() ?: -1,
                         speedText.text.toString().toIntOrNull() ?: -1,
                         bday,
                         imageText.text.toString())
