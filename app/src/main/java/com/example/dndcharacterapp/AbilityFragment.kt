@@ -11,6 +11,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class AbilityFragment(private val abilityFragmentListener: AbilityFragmentListener? = null, private val charID: Int) : Fragment() {
@@ -27,6 +30,8 @@ class AbilityFragment(private val abilityFragmentListener: AbilityFragmentListen
     private lateinit var addButton : Button
 
     private lateinit var dbHelper: DatabaseHelper
+
+    private var abilityID = 0
 
 
     override fun onCreateView(
@@ -56,7 +61,6 @@ class AbilityFragment(private val abilityFragmentListener: AbilityFragmentListen
         return view
     }
 
-    @SuppressLint("Range")
     private fun editCharater() {
         addButton.setText("Next Ability")
         nextToolbar.inflateMenu(R.menu.update_menu)
@@ -64,19 +68,55 @@ class AbilityFragment(private val abilityFragmentListener: AbilityFragmentListen
         nextToolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.update -> {
-                    //TODO: update function
+                    lifecycleScope.launch(Dispatchers.IO){
+
+                        dbHelper.updateAbility(abilityID,
+                            nameText.text.toString(),
+                            descText.text.toString(),
+                            levelText.text.toString().toIntOrNull() ?: -1)
+                    }
                     true
                 }
                 R.id.add ->
                 {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        dbHelper.insertAbility(
+                            charID,
+                            nameText.text.toString(),
+                            descText.text.toString(),
+                            levelText.text.toString().toIntOrNull() ?: -1
+                        )
+                    }
+                    true
+                }
+                R.id.clear ->{
+                    nameText.text.clear()
+                    descText.text.clear()
+                    levelText.text.clear()
                     true
                 }
                 else -> false
             }
         }
         val cursor = dbHelper.getAbility(charID)
+
         if(cursor.moveToFirst()) {
+
+            val index = cursor.getColumnIndex("ability_id")
+            abilityID= cursor.getInt(index)
+
+            val nameIndex = cursor.getColumnIndex("name")
+            val descIndex = cursor.getColumnIndex("description")
+            val levelReqIndex = cursor.getColumnIndex("level_requirement")
+
+            nameText.setText(cursor.getString(nameIndex))
+            descText.setText(cursor.getString(descIndex))
+            levelText.setText(cursor.getInt(levelReqIndex).toString())
+
+            cursor.moveToNext()
+
             addButton.setOnClickListener { nextAbility(cursor) }
+
         }
     }
 
@@ -102,10 +142,15 @@ class AbilityFragment(private val abilityFragmentListener: AbilityFragmentListen
 
         nextToolbar.setOnMenuItemClickListener { item ->
             when (item.itemId){
-                R.id.next ->
-                {
-
-                    dbHelper.insertAbility(charID, nameText.text.toString(), descText.text.toString(), levelText.text.toString().toIntOrNull() ?: -1)
+                R.id.next -> {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        dbHelper.insertAbility(
+                            charID,
+                            nameText.text.toString(),
+                            descText.text.toString(),
+                            levelText.text.toString().toIntOrNull() ?: -1
+                        )
+                    }
                     abilityFragmentListener?.nextFragmentAfterAbility()
                     true
                 }
@@ -118,7 +163,14 @@ class AbilityFragment(private val abilityFragmentListener: AbilityFragmentListen
     }
 
         private fun addAbility(){
-        dbHelper.insertAbility(charID, nameText.text.toString(), descText.text.toString(), levelText.text.toString().toIntOrNull() ?: -1)
+            lifecycleScope.launch(Dispatchers.IO) {
+                dbHelper.insertAbility(
+                    charID,
+                    nameText.text.toString(),
+                    descText.text.toString(),
+                    levelText.text.toString().toIntOrNull() ?: -1
+                )
+            }
         nameText.text.clear()
         descText.text.clear()
         levelText.text.clear()

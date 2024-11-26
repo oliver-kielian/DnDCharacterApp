@@ -374,6 +374,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         val cursor = db.query(
             "abilities",
             arrayOf(
+                "ability_id",
                 "name",
                 "description",
                 "level_requirement"
@@ -387,5 +388,21 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         )
 
         return cursor
+    }
+
+    fun updateAbility(abilityId : Int, name :String, desc: String, level: Int){
+        val db = this.readableDatabase
+
+        val ability = ContentValues().apply{
+            put("name", name)
+            put("description", desc)
+            put("level_requirement", level)
+        }
+
+        val where = "ability_id = ?"
+        val args = arrayOf(abilityId.toString())
+
+        db.update("abilities", ability, where, args)
+        db.close()
     }
 }
