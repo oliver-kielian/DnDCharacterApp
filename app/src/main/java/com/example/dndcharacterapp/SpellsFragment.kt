@@ -10,7 +10,7 @@ import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 import kotlin.time.Duration
 
-class SpellsFragment(private val spellsFragmentListener: SpellsFragmentListener, private val charID : Int) : Fragment() {
+class SpellsFragment(private val spellsFragmentListener: SpellsFragmentListener? = null, private val charID : Int) : Fragment() {
 
     interface SpellsFragmentListener{
         fun nextFragmentAfterSpells()
@@ -65,7 +65,7 @@ class SpellsFragment(private val spellsFragmentListener: SpellsFragmentListener,
                         componentsText.text.toString(),
                         durationText.text.toString(),
                         descText.text.toString())
-                    spellsFragmentListener.nextFragmentAfterSpells()
+                    spellsFragmentListener?.nextFragmentAfterSpells()
                     true
                 }
 

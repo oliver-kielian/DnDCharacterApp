@@ -43,7 +43,7 @@ class CharacterActivity : AppCompatActivity(),
 
     override fun nextFragmentFromCharacter(charID : Int) {
         this.charID = charID
-        val statsFragment = StatsFragment(this)
+        val statsFragment = StatsFragment(this, charID)
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.frameLayoutFields, statsFragment)
         ft.commit()
@@ -57,7 +57,7 @@ class CharacterActivity : AppCompatActivity(),
     }
 
     override fun nextFragmentAfterSkills() {
-        val backgroundFragment = BackgroundFragment(this)
+        val backgroundFragment = BackgroundFragment(this, charID)
         val ft = supportFragmentManager.beginTransaction()
         ft.replace(R.id.frameLayoutFields, backgroundFragment)
         ft.commit()

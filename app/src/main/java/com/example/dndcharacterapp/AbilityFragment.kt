@@ -10,7 +10,7 @@ import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 
 
-class AbilityFragment(private val abilityFragmentListener: AbilityFragmentListener, private val charID: Int) : Fragment() {
+class AbilityFragment(private val abilityFragmentListener: AbilityFragmentListener? = null, private val charID: Int) : Fragment() {
 
     interface AbilityFragmentListener{
         fun nextFragmentAfterAbility()
@@ -47,7 +47,7 @@ class AbilityFragment(private val abilityFragmentListener: AbilityFragmentListen
                 R.id.next ->
                 {
                     dbHelper.insertAbility(charID, nameText.text.toString(), descText.text.toString(), levelText.text.toString().toIntOrNull() ?: -1)
-                    abilityFragmentListener.nextFragmentAfterAbility()
+                    abilityFragmentListener?.nextFragmentAfterAbility()
                     true
                 }
 

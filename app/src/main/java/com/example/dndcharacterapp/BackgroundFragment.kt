@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 
-class BackgroundFragment(private val backgroundFragmentListener: BackgroundFragmentListener, private val charID : Int) : Fragment() {
+class BackgroundFragment(private val backgroundFragmentListener: BackgroundFragmentListener? = null, private val charID : Int) : Fragment() {
 
     interface BackgroundFragmentListener{
         fun nextFragmentAfterBackground()
@@ -54,7 +54,7 @@ class BackgroundFragment(private val backgroundFragmentListener: BackgroundFragm
                         bondsText.text.toString(),
                         flawsText.text.toString(),
                         descText.text.toString())
-                    backgroundFragmentListener.nextFragmentAfterBackground()
+                    backgroundFragmentListener?.nextFragmentAfterBackground()
                     true
                 }
 

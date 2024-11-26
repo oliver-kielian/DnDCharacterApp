@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 
-class NotesFragment(private val notesFragmentListener: NotesFragmentListener, private val charID : Int) : Fragment() {
+class NotesFragment(private val notesFragmentListener: NotesFragmentListener? = null, private val charID : Int) : Fragment() {
 
     interface NotesFragmentListener{
         fun finishAdding()
@@ -45,7 +45,7 @@ class NotesFragment(private val notesFragmentListener: NotesFragmentListener, pr
                 R.id.next ->
                 {
                     dbHelper.insertNotes(charID, noteText.text.toString())
-                    notesFragmentListener.finishAdding()
+                    notesFragmentListener?.finishAdding()
                     true
                 }
 

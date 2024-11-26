@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.Toolbar
 
-class CharacterFragment(private val characterFragmentListener: CharacterFragmentListener) : Fragment() {
+class CharacterFragment(private val characterFragmentListener: CharacterFragmentListener? = null) : Fragment() {
 
     interface CharacterFragmentListener {
         fun nextFragmentFromCharacter(charID: Int)
@@ -82,7 +82,7 @@ class CharacterFragment(private val characterFragmentListener: CharacterFragment
                     cursor.moveToFirst()
                     val index = cursor.getColumnIndex("character_id")
                     val charID = cursor.getInt(index)
-                    characterFragmentListener.nextFragmentFromCharacter(charID)
+                    characterFragmentListener?.nextFragmentFromCharacter(charID)
                     true
                 }
 
