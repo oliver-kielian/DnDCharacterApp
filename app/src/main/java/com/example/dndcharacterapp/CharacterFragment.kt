@@ -177,10 +177,11 @@ class CharacterFragment(private val characterFragmentListener: CharacterFragment
                         )
                     }
                     val cursor = dbHelper.getCharacterByName(nameText.text.toString())
-                    cursor.moveToFirst()
-                    val index = cursor.getColumnIndex("character_id")
-                    val charID = cursor.getInt(index)
-                    characterFragmentListener?.nextFragmentFromCharacter(charID)
+                    if(cursor.moveToFirst()) {
+                        val index = cursor.getColumnIndex("character_id")
+                        val charID = cursor.getInt(index)
+                        characterFragmentListener?.nextFragmentFromCharacter(charID)
+                    }
                     true
                 }
 

@@ -1,5 +1,7 @@
 package com.example.dndcharacterapp
 
+import android.animation.Animator
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,11 +12,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
-class StatsFragment(private val statsFragmentListener: StatsFragmentListener? = null, private val charID : Int) : Fragment() {
+class StatsFragment(private val statsFragmentListener: StatsFragmentListener? = null, private val charID : Int) : Fragment(), Animator.AnimatorListener {
 
     interface StatsFragmentListener{
         fun nextFragmentAfterStats()
@@ -188,6 +191,8 @@ class StatsFragment(private val statsFragmentListener: StatsFragmentListener? = 
     }
 
     private fun roll() {
+        showDiceRollAlert()
+
         val scores = mutableListOf<Int>()
         for (i in 1..6)
         {
@@ -199,7 +204,7 @@ class StatsFragment(private val statsFragmentListener: StatsFragmentListener? = 
 
             diceList.sortDescending()
 
-             scores.add(diceList[0]+diceList[1]+diceList[2])
+            scores.add(diceList[0]+diceList[1]+diceList[2])
         }
 
         strengthText.setText(scores[0].toString())
@@ -208,5 +213,37 @@ class StatsFragment(private val statsFragmentListener: StatsFragmentListener? = 
         intText.setText(scores[3].toString())
         wisText.setText(scores[4].toString())
         charismaText.setText(scores[5].toString())
+    }
+
+    private fun showDiceRollAlert() {
+        val dialogView = layoutInflater.inflate(R.layout.dice_layout, null)
+
+        val diceRollView = dialogView.findViewById<LottieAnimationView>(R.id.diceRollView)
+
+        diceRollView.playAnimation()
+
+        AlertDialog.Builder(this@StatsFragment.context)
+            .setTitle("Rolling the Dice...")
+            .setView(dialogView)
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    override fun onAnimationStart(animation: Animator) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onAnimationEnd(animation: Animator) {
+
+    }
+
+    override fun onAnimationCancel(animation: Animator) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onAnimationRepeat(animation: Animator) {
+        TODO("Not yet implemented")
     }
 }
