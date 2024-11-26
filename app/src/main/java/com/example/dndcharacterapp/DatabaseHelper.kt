@@ -328,8 +328,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
             null,
             null
         )
-        if(id == -1)
-        {
+        if (id == -1) {
             cursor = db.query(
                 "character",
                 arrayOf("character_id", "name"),
@@ -340,12 +339,23 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
                 null,
                 null
             )
-        }
-        else if(name == "")
-        {
+        } else if (name == "") {
             cursor = db.query(
                 "character",
-                arrayOf("character_id", "name", "race", "char_class", "level", "alignment", "hit_points", "max_hit_points", "armor_class", "speed", "birthday", "image"),
+                arrayOf(
+                    "character_id",
+                    "name",
+                    "race",
+                    "char_class",
+                    "level",
+                    "alignment",
+                    "hit_points",
+                    "max_hit_points",
+                    "armor_class",
+                    "speed",
+                    "birthday",
+                    "image"
+                ),
                 "character_id = ?",
                 arrayOf(id.toString()),
                 null,
@@ -355,5 +365,14 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
             )
         }
         return cursor
+    }
+
+    fun getAbility(charId: Int) : Cursor
+    {
+        val db = this.readableDatabase
+
+        val cursor = db.query(
+
+        )
     }
 }
