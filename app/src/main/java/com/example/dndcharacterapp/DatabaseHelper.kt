@@ -280,23 +280,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         db.close()
     }
 
-    fun insertBackground(charId: Int, name: String, personality_traits : String, ideals : String, bonds : String, flaws : String, desc: String){
-
-        val db = this.readableDatabase
-
-        val backgroundValues = ContentValues().apply{
-            put("character_id", charId)
-            put("name", name)
-            put("personality_traits", personality_traits)
-            put("ideals", ideals)
-            put("bonds", bonds)
-            put("flaws", flaws)
-            put("description", desc)
-        }
-
-        db.insert("background", null, backgroundValues)
-        db.close()
-    }
 
     fun getCharacterByName(name: String): Cursor {
         val db = this.readableDatabase
@@ -438,6 +421,68 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         val args = arrayOf(noteID.toString())
 
         db.update("notes", note, where, args)
+        db.close()
+    }
+
+/************************************************ Background ************************************************/
+    fun insertBackground(charId: Int, name: String, personality_traits : String, ideals : String, bonds : String, flaws : String, desc: String){
+
+        val db = this.readableDatabase
+
+        val backgroundValues = ContentValues().apply{
+            put("character_id", charId)
+            put("name", name)
+            put("personality_traits", personality_traits)
+            put("ideals", ideals)
+            put("bonds", bonds)
+            put("flaws", flaws)
+            put("description", desc)
+        }
+
+        db.insert("background", null, backgroundValues)
+        db.close()
+    }
+
+    fun getBackground(charId: Int): Cursor {
+        val db = this.readableDatabase
+
+        val cursor = db.query(
+            "background",
+            arrayOf("background_id",
+                "character_id",
+                "name",
+                "personality_traits",
+                "ideals",
+                "bonds",
+                "flaws",
+                "description"),
+            "character_id = ?",
+            arrayOf(charId.toString()),
+            null,
+            null,
+            null,
+            null
+        )
+
+        return cursor
+    }
+
+    fun updateBackground(backgroundID : Int, name: String, personality_traits : String, ideals : String, bonds : String, flaws : String, desc: String){
+        val db = this.readableDatabase
+
+        val background = ContentValues().apply{
+            put("name", name)
+            put("personality_traits", personality_traits)
+            put("ideals", ideals)
+            put("bonds", bonds)
+            put("flaws", flaws)
+            put("description", desc)
+        }
+
+        val where = "background_id = ?"
+        val args = arrayOf(backgroundID.toString())
+
+        db.update("background", background, where, args)
         db.close()
     }
 }
