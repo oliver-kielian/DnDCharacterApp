@@ -26,6 +26,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
                 hit_points INTEGER,
                 max_hit_points INTEGER,
                 armor_class INTEGER,
+                proficiency_bonus INTEGER,
                 speed INTEGER,
                 birthday STRING,
                 image STRING
@@ -372,7 +373,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         return cursor
     }
 
-    fun insertCharacter(name:String, race:String, char_class:String, level:Int, alignment:String, hit_points:Int, max_hit_points:Int, armor_class:Int, speed:Int, bday:String, image:String){
+    fun insertCharacter(name:String, race:String, char_class:String, level:Int, alignment:String, hit_points:Int, max_hit_points:Int, armor_class:Int, proficient: Int, speed: Int, bday: String, image:String){
         val db = this.readableDatabase
 
         val characterValues = ContentValues().apply {
@@ -384,6 +385,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
             put("hit_points", hit_points)
             put("max_hit_points", max_hit_points)
             put("armor_class", armor_class)
+            put("proficiency_bonus", proficient)
             put("speed", speed)
             put("birthday", bday)
             put("image", image)
@@ -393,7 +395,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         db.close()
     }
 
-    fun updateCharacter(charId: Int, name:String, race:String, char_class:String, level:Int, alignment:String, hit_points:Int, max_hit_points:Int, armor_class:Int, speed:Int, bday:String, image:String)
+    fun updateCharacter(charId: Int, name:String, race:String, char_class:String, level:Int, alignment:String, hit_points:Int, max_hit_points:Int, armor_class:Int, proficient: Int, speed:Int, bday:String, image:String)
     {
         val db = this.readableDatabase
 
@@ -406,6 +408,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
             put("hit_points", hit_points)
             put("max_hit_points", max_hit_points)
             put("armor_class", armor_class)
+            put("proficiency_bonus", proficient)
             put("speed", speed)
             put("birthday", bday)
             put("image", image)
