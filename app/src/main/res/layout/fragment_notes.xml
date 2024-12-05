@@ -18,6 +18,12 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
 
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/note_text" />
+
         <EditText
             android:id="@+id/editTextTextNote"
             android:layout_width="match_parent"

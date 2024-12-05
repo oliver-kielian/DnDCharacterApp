@@ -18,6 +18,12 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ability_name" />
+
         <EditText
             android:id="@+id/editTextTextAbilityName"
             android:layout_width="match_parent"
@@ -26,6 +32,12 @@
             android:inputType="text"
             android:hint="@string/ability_name" />
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ability_desc" />
+
         <EditText
             android:id="@+id/editTextTextAbilityDesc"
             android:layout_width="match_parent"
@@ -33,6 +45,12 @@
             android:ems="10"
             android:inputType="text"
             android:hint="@string/ability_desc" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/level_requirement" />
 
         <EditText
             android:id="@+id/editTextNumberAbilityLevel"

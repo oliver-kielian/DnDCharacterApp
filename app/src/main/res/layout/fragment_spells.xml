@@ -18,6 +18,12 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
 
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/spell_name" />
+
         <EditText
             android:id="@+id/editTextTextNameSpells"
             android:layout_width="match_parent"
@@ -25,6 +31,12 @@
             android:ems="10"
             android:inputType="text"
             android:hint="@string/spell_name" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/level" />
 
         <EditText
             android:id="@+id/editTextNumberLevelSpells"
@@ -34,6 +46,12 @@
             android:inputType="number"
             android:hint="@string/level"/>
 
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/school" />
+
         <EditText
             android:id="@+id/editTextTextSchool"
             android:layout_width="match_parent"
@@ -41,6 +59,12 @@
             android:ems="10"
             android:inputType="text"
             android:hint="@string/school" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/casting_time" />
 
         <EditText
             android:id="@+id/editTextTextCastingTime"
@@ -50,6 +74,12 @@
             android:inputType="text"
             android:hint="@string/casting_time" />
 
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/range" />
+
         <EditText
             android:id="@+id/editTextTextRange"
             android:layout_width="match_parent"
@@ -57,6 +87,12 @@
             android:ems="10"
             android:inputType="text"
             android:hint="@string/range" />
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/components" />
 
         <EditText
             android:id="@+id/editTextTextComponents"
@@ -66,6 +102,12 @@
             android:inputType="text"
             android:hint="@string/components" />
 
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/duration" />
+
         <EditText
             android:id="@+id/editTextTextDuration"
             android:layout_width="match_parent"
@@ -73,6 +115,12 @@
             android:ems="10"
             android:inputType="text"
             android:hint="@string/duration" />
+
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/description" />
 
         <EditText
             android:id="@+id/editTextTextDescSpells"

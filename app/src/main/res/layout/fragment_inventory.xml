@@ -18,6 +18,12 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
 
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/item_name" />
+
         <EditText
             android:id="@+id/editTextTextNameInventory"
             android:layout_width="match_parent"
@@ -25,6 +31,12 @@
             android:ems="10"
             android:inputType="text"
             android:hint="@string/item_name" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/quantity" />
 
         <EditText
             android:id="@+id/editTextNumberQuantity"
@@ -34,6 +46,12 @@
             android:inputType="number"
             android:hint="@string/quantity"/>
 
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/weight" />
+
         <EditText
             android:id="@+id/editTextNumberWeight"
             android:layout_width="match_parent"
@@ -41,6 +59,12 @@
             android:ems="10"
             android:inputType="numberDecimal"
             android:hint="@string/weight"/>
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/description" />
 
         <EditText
             android:id="@+id/editTextTextDescInventory"

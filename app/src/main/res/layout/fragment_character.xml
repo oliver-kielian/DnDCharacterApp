@@ -18,6 +18,12 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
 
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name" />
+
         <EditText
             android:id="@+id/editTextTextName"
             android:layout_width="match_parent"
@@ -25,6 +31,12 @@
             android:ems="10"
             android:inputType="text"
             android:hint="@string/name" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/race" />
 
         <EditText
             android:id="@+id/editTextTextRace"
@@ -34,6 +46,12 @@
             android:inputType="text"
             android:hint="@string/race" />
 
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/classText" />
+
         <EditText
             android:id="@+id/editTextTextClass"
             android:layout_width="match_parent"
@@ -41,6 +59,12 @@
             android:ems="10"
             android:inputType="text"
             android:hint="@string/classText" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/level" />
 
         <EditText
             android:id="@+id/editTextNumberLevel"
@@ -50,6 +74,12 @@
             android:inputType="number"
             android:hint="@string/level"/>
 
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/alignment" />
+
         <EditText
             android:id="@+id/editTextTextAlignment"
             android:layout_width="match_parent"
@@ -57,6 +87,12 @@
             android:ems="10"
             android:inputType="text"
             android:hint="@string/alignment" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/current_hit_points" />
 
         <EditText
             android:id="@+id/editTextNumberHitPoints"
@@ -66,6 +102,12 @@
             android:inputType="number"
             android:hint="@string/current_hit_points"/>
 
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/max_hit_points" />
+
         <EditText
             android:id="@+id/editTextNumberMaxHitPoints"
             android:layout_width="match_parent"
@@ -73,6 +115,12 @@
             android:ems="10"
             android:inputType="number"
             android:hint="@string/max_hit_points"/>
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/armor_class" />
 
         <EditText
             android:id="@+id/editTextNumberArmorClass"
@@ -82,6 +130,12 @@
             android:inputType="number"
             android:hint="@string/armor_class"/>
 
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/proficiency_bonus" />
+
         <EditText
             android:id="@+id/editTextNumberProficiency"
             android:layout_width="match_parent"
@@ -90,6 +144,12 @@
             android:inputType="number"
             android:hint="@string/proficiency_bonus"/>
 
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/speed" />
 
         <EditText
             android:id="@+id/editTextNumberSpeed"
@@ -104,6 +164,12 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="@string/select_birthday" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/image_url" />
 
         <EditText
             android:id="@+id/editTextTextImage"

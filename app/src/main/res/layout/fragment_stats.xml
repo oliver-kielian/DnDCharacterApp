@@ -24,6 +24,12 @@
             android:layout_height="50dp"
             android:text="@string/roll_stats" />
 
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/strength" />
+
         <EditText
             android:id="@+id/editTextNumberStrength"
             android:layout_width="match_parent"
@@ -31,6 +37,12 @@
             android:ems="10"
             android:inputType="number"
             android:hint="@string/strength"/>
+
+        <TextView
+            android:id="@+id/textView38"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/modifier" />
 
         <EditText
             android:id="@+id/editTextNumberStrengthMod"
@@ -40,6 +52,12 @@
             android:inputType="number"
             android:hint="@string/modifier"/>
 
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dexterity" />
+
         <EditText
             android:id="@+id/editTextNumberDexterity"
             android:layout_width="match_parent"
@@ -47,6 +65,12 @@
             android:ems="10"
             android:inputType="number"
             android:hint="@string/dexterity"/>
+
+        <TextView
+            android:id="@+id/textView42"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/modifier" />
 
         <EditText
             android:id="@+id/editTextNumberDexterityMod"
@@ -56,6 +80,12 @@
             android:inputType="number"
             android:hint="@string/modifier"/>
 
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/constitution" />
+
         <EditText
             android:id="@+id/editTextNumberConstitution"
             android:layout_width="match_parent"
@@ -63,6 +93,12 @@
             android:ems="10"
             android:inputType="number"
             android:hint="@string/constitution"/>
+
+        <TextView
+            android:id="@+id/textView43"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/modifier" />
 
         <EditText
             android:id="@+id/editTextNumberConstitutionMod"
@@ -72,6 +108,12 @@
             android:inputType="number"
             android:hint="@string/modifier"/>
 
+        <TextView
+            android:id="@+id/textView44"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/intelligence" />
+
         <EditText
             android:id="@+id/editTextNumberIntelligence"
             android:layout_width="match_parent"
@@ -79,6 +121,12 @@
             android:ems="10"
             android:inputType="number"
             android:hint="@string/intelligence"/>
+
+        <TextView
+            android:id="@+id/textView45"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/modifier" />
 
         <EditText
             android:id="@+id/editTextNumberIntelligenceMod"
@@ -88,6 +136,12 @@
             android:inputType="number"
             android:hint="@string/modifier"/>
 
+        <TextView
+            android:id="@+id/textView46"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/wisdom" />
+
         <EditText
             android:id="@+id/editTextNumberWisdom"
             android:layout_width="match_parent"
@@ -95,6 +149,12 @@
             android:ems="10"
             android:inputType="number"
             android:hint="@string/wisdom"/>
+
+        <TextView
+            android:id="@+id/textView47"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/modifier" />
 
         <EditText
             android:id="@+id/editTextNumberWisdomMod"
@@ -104,6 +164,12 @@
             android:inputType="number"
             android:hint="@string/modifier"/>
 
+        <TextView
+            android:id="@+id/textView48"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/charisma" />
+
         <EditText
             android:id="@+id/editTextNumberCharisma"
             android:layout_width="match_parent"
@@ -111,6 +177,12 @@
             android:ems="10"
             android:inputType="number"
             android:hint="@string/charisma"/>
+
+        <TextView
+            android:id="@+id/textView49"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/modifier" />
 
         <EditText
             android:id="@+id/editTextNumberCharismaMod"

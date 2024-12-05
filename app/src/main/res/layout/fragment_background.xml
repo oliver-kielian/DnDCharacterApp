@@ -18,6 +18,12 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
 
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/background_name" />
+
         <EditText
             android:id="@+id/editTextTextBackgroundName"
             android:layout_width="match_parent"
@@ -25,6 +31,12 @@
             android:ems="10"
             android:inputType="text"
             android:hint="@string/background_name" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/personality_trait" />
 
         <EditText
             android:id="@+id/editTextTextPerson"
@@ -34,6 +46,12 @@
             android:inputType="text"
             android:hint="@string/personality_trait" />
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ideals" />
+
         <EditText
             android:id="@+id/editTextTextIdeals"
             android:layout_width="match_parent"
@@ -41,6 +59,12 @@
             android:ems="10"
             android:inputType="text"
             android:hint="@string/ideals" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bonds" />
 
         <EditText
             android:id="@+id/editTextTextBonds"
@@ -50,6 +74,12 @@
             android:inputType="text"
             android:hint="@string/bonds" />
 
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/flaws" />
+
         <EditText
             android:id="@+id/editTextTextFlaws"
             android:layout_width="match_parent"
@@ -57,6 +87,12 @@
             android:ems="10"
             android:inputType="text"
             android:hint="@string/flaws" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/story" />
 
         <EditText
             android:id="@+id/editTextTextBackgroundDesc"
