@@ -666,7 +666,19 @@ fun insertStats(charId: Int, strength : Int, strMod : Int, dex : Int, dexMod : I
     db.close()
 }
 
-    fun updateStats(statId : Int, strength : Int, strMod : Int, dex : Int, dexMod : Int, cons : Int, consMod : Int, int : Int, intMod : Int, wis : Int, wisMod : Int, char : Int, charMod : Int)
+    fun updateStats(statId : Int,
+                    strength : Int,
+                    strMod : Int,
+                    dex : Int,
+                    dexMod : Int,
+                    cons : Int,
+                    consMod : Int,
+                    int : Int,
+                    intMod : Int,
+                    wis : Int,
+                    wisMod : Int,
+                    char : Int,
+                    charMod : Int)
     {
         val db = this.readableDatabase
 
@@ -685,7 +697,7 @@ fun insertStats(charId: Int, strength : Int, strMod : Int, dex : Int, dexMod : I
             put("charisma_modifier", charMod)
         }
 
-        val where = "stat_id"
+        val where = "stat_id = ?"
 
         val args = arrayOf(statId.toString())
 

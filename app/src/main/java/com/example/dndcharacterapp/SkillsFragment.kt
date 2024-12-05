@@ -116,7 +116,12 @@ class SkillsFragment(private val skillsFragmentListener: SkillsFragmentListener?
 
                 skillsNameTextView.text = skills[0]
                 checkBoxProficient.isChecked = proficient == 1
-                bonusText.setText(cursor.getInt(bonusIndex).toString())
+                bonusText.setText(if (cursor.getInt(bonusIndex).toString() == "-1"){
+                    ""
+                }
+                else{
+                    cursor.getInt(bonusIndex).toString()
+                })
 
                 cursor.moveToNext()
 
