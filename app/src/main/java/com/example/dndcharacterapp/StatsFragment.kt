@@ -135,23 +135,86 @@ class StatsFragment(private val statsFragmentListener: StatsFragmentListener? = 
             val charIndex = cursor.getColumnIndex("charisma")
             val charModIndex = cursor.getColumnIndex("charisma_modifier")
 
-            strengthText.setText(cursor.getInt(strIndex).toString())
-            strengthTextMod.setText(cursor.getInt(strModIndex).toString())
+            strengthText.setText(if (cursor.getInt(strIndex).toString() == "-1"){
+                ""
+            }
+            else{
+                cursor.getInt(strIndex).toString()
+            })
+            strengthTextMod.setText(if (cursor.getInt(strModIndex).toString() == "-1"){
+                ""
+            }
+            else{
+                cursor.getInt(strModIndex).toString()
+            })
 
-            dexText.setText(cursor.getInt(dexIndex).toString())
-            dexTextMod.setText(cursor.getInt(dexModIndex).toString())
+            dexText.setText(if (cursor.getInt(dexIndex).toString() == "-1"){
+                ""
+            }
+            else
+            {
+                cursor.getInt(dexIndex).toString()
+            })
+            dexTextMod.setText(if (cursor.getInt(dexModIndex).toString() == "-1"){
+                ""
+            }
+            else{
+                cursor.getInt(dexModIndex).toString()
+            })
 
-            constitutionText.setText(cursor.getInt(consIndex).toString())
-            constitutionTextMod.setText(cursor.getInt(consModIndex).toString())
+            constitutionText.setText(if (cursor.getInt(consIndex).toString() == "-1"){
+                ""
+            }
+            else
+            {
+                cursor.getInt(consIndex).toString()
+            })
+            constitutionTextMod.setText(if (cursor.getInt(consModIndex).toString() == "-1"){
+                ""
+            }
+            else{
+                cursor.getInt(consModIndex).toString()
+            })
 
-            intText.setText(cursor.getInt(intIndex).toString())
-            intTextMod.setText(cursor.getInt(intModIndex).toString())
+            intText.setText(if (cursor.getInt(intIndex).toString() == "-1"){
+                ""
+            }
+            else{
+                cursor.getInt(intIndex).toString()
+            })
+            intTextMod.setText(if (cursor.getInt(intModIndex).toString() == "-1"){
+                ""
+            }
+            else{
+                cursor.getInt(intModIndex).toString()
+            })
 
-            wisText.setText(cursor.getInt(wisIndex).toString())
-            wisTextMod.setText(cursor.getInt(wisModIndex).toString())
+            wisText.setText(if (cursor.getInt(wisIndex).toString() == "-1"){
+                ""
+            }
+            else
+            {
+                cursor.getInt(wisIndex).toString()
+            })
+            wisTextMod.setText(if (cursor.getInt(wisModIndex).toString() == "-1"){
+                ""
+            }
+            else{
+                cursor.getInt(wisModIndex).toString()
+            })
 
-            charismaText.setText(cursor.getInt(charIndex).toString())
-            charismaTextMod.setText(cursor.getInt(charModIndex).toString())
+            charismaText.setText(if (cursor.getInt(charIndex).toString() == "-1"){
+                ""
+            }
+            else{
+                cursor.getInt(charIndex).toString()
+            })
+            charismaTextMod.setText(if (cursor.getInt(charModIndex).toString() == "-1"){
+                ""
+            }
+            else{
+                cursor.getInt(charModIndex).toString()
+            })
 
         }
     }

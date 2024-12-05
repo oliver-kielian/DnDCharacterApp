@@ -136,7 +136,12 @@ class SpellsFragment(private val spellsFragmentListener: SpellsFragmentListener?
             val descIndex = cursor.getColumnIndex("description")
 
             spellNameText.setText(cursor.getString(nameIndex))
-            levelText.setText(cursor.getInt(levelIndex).toString())
+            levelText.setText(if (cursor.getInt(levelIndex).toString() == "-1"){
+                ""
+            }
+            else{
+                cursor.getInt(levelIndex).toString()
+            })
             schoolText.setText(cursor.getString(schoolIndex))
             castingTimeText.setText(cursor.getString(castingTimeIndex))
             rangeText.setText(cursor.getString(rangeIndex))
@@ -163,7 +168,12 @@ class SpellsFragment(private val spellsFragmentListener: SpellsFragmentListener?
             val descIndex = cursor.getColumnIndex("description")
 
             spellNameText.setText(cursor.getString(nameIndex))
-            levelText.setText(cursor.getInt(levelIndex).toString())
+            levelText.setText(if (cursor.getInt(levelIndex).toString() == "-1"){
+                ""
+            }
+            else{
+                cursor.getInt(levelIndex).toString()
+            })
             schoolText.setText(cursor.getString(schoolIndex))
             castingTimeText.setText(cursor.getString(castingTimeIndex))
             rangeText.setText(cursor.getString(rangeIndex))

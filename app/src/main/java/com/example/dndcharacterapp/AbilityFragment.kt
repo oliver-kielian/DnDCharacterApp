@@ -128,7 +128,12 @@ class AbilityFragment(private val abilityFragmentListener: AbilityFragmentListen
 
             nameText.setText(cursor.getString(nameIndex))
             descText.setText(cursor.getString(descIndex))
-            levelText.setText(cursor.getInt(levelReqIndex).toString())
+            levelText.setText(if (cursor.getInt(levelReqIndex).toString() == "-1"){
+                ""
+            }
+            else{
+                cursor.getInt(levelReqIndex).toString()
+            })
 
             cursor.moveToNext()
         }

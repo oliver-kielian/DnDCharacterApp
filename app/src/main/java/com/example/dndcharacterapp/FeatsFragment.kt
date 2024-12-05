@@ -121,7 +121,12 @@ class FeatsFragment(private val featsFragmentListener: FeatsFragmentListener? = 
 
             nameText.setText(cursor.getString(nameIndex))
             descText.setText(cursor.getString(descIndex))
-            prereqText.setText(cursor.getInt(prereqIndex).toString())
+            prereqText.setText(if (cursor.getInt(prereqIndex).toString() =="-1"){
+                ""
+            }
+            else{
+                cursor.getInt(prereqIndex).toString()
+            })
 
             cursor.moveToNext()
         }

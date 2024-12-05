@@ -129,8 +129,19 @@ class InventoryFragment(private val inventoryFragmentListener: InventoryFragment
             val descIndex = cursor.getColumnIndex("description")
 
             nameText.setText(cursor.getString(nameIndex))
-            quantityText.setText(cursor.getInt(quantityIndex).toString())
-            weightText.setText(cursor.getFloat(weightIndex).toString())
+            quantityText.setText(if (cursor.getInt(quantityIndex).toString() == "-1"){
+                ""
+            }
+            else
+            {
+                cursor.getInt(quantityIndex).toString()
+            })
+            weightText.setText(if (cursor.getFloat(weightIndex).toString() == "-1"){
+                    ""
+                }
+            else{
+                cursor.getFloat(weightIndex).toString()
+            })
             descText.setText(cursor.getString(descIndex))
 
             cursor.moveToNext()
