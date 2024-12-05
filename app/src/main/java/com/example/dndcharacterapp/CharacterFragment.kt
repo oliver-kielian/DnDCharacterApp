@@ -133,6 +133,7 @@ class CharacterFragment(private val characterFragmentListener: CharacterFragment
                 val hitPointsIndex = cursor.getColumnIndex("hit_points")
                 val maxHitPointsIndex = cursor.getColumnIndex("max_hit_points")
                 val armorIndex = cursor.getColumnIndex("armor_class")
+                val proficiencyIndex = cursor.getColumnIndex("proficiency_bonus")
                 val speedIndex = cursor.getColumnIndex("speed")
                 val birthdayIndex = cursor.getColumnIndex("birthday")
                 val imageIndex = cursor.getColumnIndex("image")
@@ -140,12 +141,46 @@ class CharacterFragment(private val characterFragmentListener: CharacterFragment
                 nameText.setText(cursor.getString(nameIndex))
                 raceText.setText(cursor.getString(raceIndex))
                 classText.setText(cursor.getString(classIndex))
-                levelText.setText(cursor.getInt(levelIndex).toString())
+                levelText.setText(if (cursor.getInt(levelIndex).toString() == "-1"){
+                    ""
+                }
+                else
+                {
+                    cursor.getInt(levelIndex).toString()
+                })
                 alignmentText.setText(cursor.getString(alignmentIndex))
-                hitPointsText.setText(cursor.getInt(hitPointsIndex).toString())
-                maxHitPointsText.setText(cursor.getInt(maxHitPointsIndex).toString())
-                armorClassText.setText(cursor.getInt(armorIndex).toString())
-                speedText.setText(cursor.getInt(speedIndex).toString())
+                hitPointsText.setText(if (cursor.getInt(hitPointsIndex).toString() == "-1"){
+                    ""
+                }
+                else{
+                    cursor.getInt(hitPointsIndex).toString()
+                })
+                maxHitPointsText.setText(if(cursor.getInt(maxHitPointsIndex).toString() == "-1"){
+                    ""
+
+                }
+                else{
+                    cursor.getInt(maxHitPointsIndex).toString()
+                })
+                armorClassText.setText(if(cursor.getInt(armorIndex).toString() == "-1"){
+                    ""
+                }
+                else
+                {
+                    cursor.getInt(armorIndex).toString()
+                })
+                proficiencyText.setText(if (cursor.getInt(proficiencyIndex).toString() == "-1"){
+                    ""
+                }
+                else{
+                    cursor.getInt(proficiencyIndex).toString()
+                })
+                speedText.setText(if (cursor.getInt(speedIndex).toString() == "-1"){
+                    ""
+                }
+                else{
+                    cursor.getInt(speedIndex).toString()
+                })
                 birthdayButton.text = cursor.getString(birthdayIndex)
                 imageText.setText(cursor.getString(imageIndex))
 

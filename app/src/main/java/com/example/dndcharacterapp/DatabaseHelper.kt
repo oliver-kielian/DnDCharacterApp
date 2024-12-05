@@ -358,6 +358,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
                 "hit_points",
                 "max_hit_points",
                 "armor_class",
+                "proficiency_bonus",
                 "speed",
                 "birthday",
                 "image"

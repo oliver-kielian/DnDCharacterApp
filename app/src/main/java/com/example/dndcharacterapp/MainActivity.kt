@@ -13,8 +13,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity(), ItemAdapter.ItemAdapterListener {
     private lateinit var mainToolbar : Toolbar
@@ -35,6 +41,12 @@ class MainActivity : AppCompatActivity(), ItemAdapter.ItemAdapterListener {
             result ->
         if(result.resultCode != ADDED){
             errorText.text = "Failed to add character, Please try again"
+            CoroutineScope(Dispatchers.IO).launch{
+                delay(10000)
+                withContext(Dispatchers.Main) {
+                    errorText.text = ""
+                }
+            }
         }
         else{
             adapter.updateCursor(dbHelper.getAllCharacters())
